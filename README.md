@@ -33,11 +33,11 @@ This suite includes **three financial calculators**:
 - Seeing if you're over or under budget in real-time
 - Finding extra money to put toward debt or savings
 
-### 2. 💸 Commission Breakdown
-**What it does:** Splits commission checks into percentage-based buckets (e.g., 40% to loans, 35% to fun money, 25% to savings).
+### 2. 💸 Bonus Breakdown
+**What it does:** Splits bonus checks into percentage-based buckets (e.g., 40% to loans, 35% to fun money, 25% to savings).
 
 **Use it for:**
-- Planning how to allocate bonuses or commissions
+- Planning how to allocate bonuses or windfalls
 - Ensuring percentages add up to 100%
 - Consistent money management for irregular income
 
@@ -64,7 +64,7 @@ All calculations run on your computer. No servers, no uploads, no accounts, no t
 ### 📊 Accurate Math
 - **Budget:** True bi-weekly to monthly conversion (26 paychecks/year)
 - **Loans:** Daily interest accrual (matches real loan behavior)
-- **Commission:** Percentage-based allocation with validation
+- **Bonus:** Percentage-based allocation with validation
 
 ### 🎯 Multiple Strategies
 Compare Avalanche (highest interest first) vs Snowball (smallest balance first) to find your optimal debt payoff method.
@@ -92,7 +92,7 @@ That's it! No installation, no setup, no accounts needed.
 - Click the **Pills** in the menu bar
 - Select which calculator you want to use:
   - Budget Planner
-  - Commission Breakdown  
+  - Bonus Breakdown  
   - Student Loans Calculator
 
 ### Step 3: Enter Your Data
@@ -137,15 +137,15 @@ Then you allocate that monthly amount to your expense categories.
 
 ---
 
-### Commission Breakdown
-**The Problem:** You get a commission/bonus check. How should you split it?
+### Bonus Breakdown
+**The Problem:** You get a bonus check. How should you split it?
 
 **The Solution:** Set percentage allocations for each category:
 - Student Loan Boost: 40%
 - Fun Money: 35%
 - Savings: 25%
 
-Enter your commission amount, and it automatically calculates the dollar amount for each category. The calculator ensures your percentages add up to exactly 100%.
+Enter your bonus amount, and it automatically calculates the dollar amount for each category. The calculator ensures your percentages add up to exactly 100%.
 
 ---
 
@@ -196,12 +196,12 @@ Monthly calculations can be off by hundreds of dollars. Daily calculations match
 
 ---
 
-### Example 2: Bonus Commission Split
-**Situation:** You just got a $5,000 commission check. You want to be smart about how you spend it.
+### Example 2: Bonus Split
+**Situation:** You just got a $5,000 bonus check. You want to be smart about how you spend it.
 
 **How to use:**
-1. Open **Commission Breakdown**
-2. Enter commission: $5,000
+1. Open **Bonus Breakdown**
+2. Enter bonus: $5,000
 3. Set your percentages:
    - Student Loans: 40% → **$2,000**
    - Emergency Fund: 30% → **$1,500**
@@ -258,7 +258,7 @@ Monthly calculations can be off by hundreds of dollars. Daily calculations match
 ```
 personal-finance-calculators/
 ├── index.html                    # Budget Planner (start here)
-├── commission-breakdown.html     # Commission Calculator
+├── commission-breakdown.html     # Bonus Calculator
 ├── student-loans.html            # Student Loan Calculator
 └── README.md                     # This file
 ```
@@ -331,7 +331,7 @@ Many people are paid every 2 weeks (26 paychecks/year), not twice a month (24 pa
 **Personal Finance Calculators** is a suite of three privacy-focused tools that run **100% locally on your computer**:
 
 1. **Budget Planner** - Convert bi-weekly paychecks to monthly budgets
-2. **Commission Breakdown** - Split bonuses into percentage allocations
+2. **Bonus Breakdown** - Split bonuses into percentage allocations
 3. **Student Loan Calculator** - Calculate payoff dates with daily interest accuracy
 
 **No installation. No accounts. No cloud. Just open and use.**
