@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budget Planner | Personal Finance Calculators</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="assets/js/navigation.js"></script>
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        .dragging {
-            opacity: 0.5;
-        }
-        .drag-over {
-            border-top: 2px solid #667eea;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Budget Planner | Personal Finance Calculators</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    [v-cloak] { display: none; }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    .dragging { opacity: 0.55; }
+    .drop-target { outline: 2px dashed rgba(59,130,246,.45); outline-offset: -6px; }
+  </style>
 </head>
-<body class="p-4 md:p-8">
+
+<body class="bg-slate-50 p-4 md:p-8 text-slate-900 font-sans">
     <div class="max-w-4xl mx-auto">
         <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-8">
             <div class="flex items-center justify-between mb-8">
