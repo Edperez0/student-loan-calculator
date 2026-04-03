@@ -1,282 +1,275 @@
 # 💰 Personal Finance Calculators
 
-A suite of powerful, privacy-focused financial planning tools. All calculators run 100% in your browser—no server uploads, no accounts, no tracking. Take control of your finances with professional-grade tools that respect your privacy.
+A collection of three powerful financial planning tools that run **100% locally on your computer**. No internet required, no accounts, no cloud storage—just open the files in your browser and start planning your finances with complete privacy.
 
 ![Status](https://img.shields.io/badge/Status-Active-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)
+![Local](https://img.shields.io/badge/Hosting-Local-green)
 
-## 📊 Available Calculators
+---
 
-### 🏠 [Budget Planner](index.html) (Landing Page)
-- **Bi-weekly to monthly conversion**: Enter your actual paycheck amount
-- **Drag-and-drop expense reordering**: Organize categories your way
-- **Real-time budget tracking**: See spending vs income instantly
-- **Auto-save**: Never lose your budget data
+## 🏠 Hosted Locally
 
-### 🎓 [Student Loan Payoff Calculator](student-loans.html)
-- **Daily interest accrual**: More accurate than monthly calculations
-- **Avalanche vs Snowball comparison**: Find your optimal payoff strategy
-- **Bonus injection modeling**: Plan for tax refunds and windfalls
-- **CSV export**: Download complete payment schedules
+**What does "hosted locally" mean?**
+- All files run directly on your computer
+- Your financial data **never leaves your device**
+- Works **offline** (no internet needed after initial download)
+- Data saved in your **browser's localStorage** (stays on your machine)
+- No servers, no databases, no cloud uploads
+- **100% private** - only you can see your information
+
+---
+
+## 📊 What's Included
+
+This suite includes **three financial calculators**:
+
+### 1. 💵 Budget Planner
+**What it does:** Converts your bi-weekly paycheck into a monthly budget and tracks your expenses.
+
+**Use it for:**
+- Planning your monthly spending when you're paid every 2 weeks
+- Tracking categories like rent, groceries, savings, etc.
+- Seeing if you're over or under budget in real-time
+- Finding extra money to put toward debt or savings
+
+### 2. 💸 Commission Breakdown
+**What it does:** Splits commission checks into percentage-based buckets (e.g., 40% to loans, 35% to fun money, 25% to savings).
+
+**Use it for:**
+- Planning how to allocate bonuses or commissions
+- Ensuring percentages add up to 100%
+- Consistent money management for irregular income
+
+### 3. 🎓 Student Loan Payoff Calculator
+**What it does:** Calculates exactly when your student loans will be paid off using **daily interest calculations** (the most accurate method).
+
+**Use it for:**
+- Seeing your debt-free date
+- Comparing bi-weekly vs monthly payments
+- Planning bonus payments (tax refunds, work bonuses)
+- Testing "what if" scenarios (e.g., "What if I pay an extra $100/month?")
+- Choosing between Avalanche (highest interest first) or Snowball (smallest balance first) strategies
+
+---
 
 ## ✨ Key Features
 
-### 💾 **Auto-Save & Scenarios**
-- **Automatic Persistence**: Your data is saved instantly with every change using localStorage
-- **Multiple Scenarios**: Save and switch between different payoff plans (e.g., "Aggressive Plan", "Conservative Budget")
-- **Never Lose Progress**: Close and reopen anytime—your loans, payments, and bonuses are always there
+### 💾 Auto-Save
+Every change is automatically saved to your browser. Close and reopen anytime—your data persists.
 
-### 📊 **Advanced Calculation**
-- **Daily Interest Accrual**: More accurate than monthly calculations—mimics how loans actually work
-- **Bi-Weekly vs Monthly Payments**: Compare how payment frequency impacts total interest
-- **Bonus Injections**: Model tax refunds, work bonuses, or windfalls with customizable frequencies (weekly, bi-weekly, monthly, quarterly)
-- **40-Year Simulation**: Catches problematic interest-only or negatively amortizing loans
+### 🔒 100% Private
+All calculations run on your computer. No servers, no uploads, no accounts, no tracking.
 
-### 💰 **Strategy Comparison**
-- **Avalanche Method**: Pay highest APR first (minimizes interest—mathematically optimal)
-- **Snowball Method**: Pay smallest balance first (psychological quick wins)
-- **Side-by-Side Results**: See exactly how much each strategy saves and which pays off faster
-- **Smart Recommendations**: Get personalized advice based on your loan portfolio
+### 📊 Accurate Math
+- **Budget:** True bi-weekly to monthly conversion (26 paychecks/year)
+- **Loans:** Daily interest accrual (matches real loan behavior)
+- **Commission:** Percentage-based allocation with validation
 
-### 📥 **Export & Share**
-- **CSV Export**: Download full payment schedule for Excel/Google Sheets
-- **PDF Export**: Coming soon—professional reports with charts
-- **Print-Friendly**: Use browser print (Ctrl+P / Cmd+P) for immediate reports
+### 🎯 Multiple Strategies
+Compare Avalanche (highest interest first) vs Snowball (smallest balance first) to find your optimal debt payoff method.
 
-### 🔒 **100% Private**
-- All calculations run in your browser
-- No data sent to servers
-- No account required
-- No tracking (except optional Google Analytics for site improvements)
+### 📥 Export Your Data
+Download payment schedules as CSV or print directly from your browser.
 
-### 🧭 **Unified Navigation**
-- Seamless hamburger menu navigation between all calculators
-- Each tool maintains independent localStorage
-- Switch tools without losing any data
-- Consistent design across all calculators
+### 🧭 Easy Navigation
+Hamburger menu (☰) in the top-right corner lets you switch between all three calculators instantly.
 
 ---
 
-## 🚀 Quick Start
+---
 
-1. **Open**: `index.html` in any modern browser (Budget Planner loads first)
-2. **Choose Your Tool**: Use the hamburger menu (☰) to navigate between calculators
-3. **Enter Your Data**: All tools auto-save as you type
-4. **Export Results**: Download CSV reports or print directly from your browser
+## 🚀 How to Use (3 Simple Steps)
 
-### Example: Complete Financial Picture
+### Step 1: Open the Files
+1. Download/clone this repository to your computer
+2. Navigate to the folder: `/personal-finance-calculators/`
+3. **Double-click `index.html`** (opens Budget Planner in your browser)
 
-**Budget Planner:**
-```
-Bi-weekly take-home: $2,100
-Monthly equivalent: $4,550
-Total expenses: $3,800
-Remaining: $750/month for debt payoff
-```
+That's it! No installation, no setup, no accounts needed.
 
-**Student Loan Calculator:**
-```
-Loan 1: $30,000 @ 5.5% APR, $175 bi-weekly
-Loan 2: $15,000 @ 6.8% APR, $100 bi-weekly  
-Extra from budget: $325 bi-weekly bonus
+### Step 2: Navigate Between Calculators
+- Click the **hamburger menu (☰)** in the top-right corner
+- Select which calculator you want to use:
+  - Budget Planner
+  - Commission Breakdown  
+  - Student Loans Calculator
 
-Result: Paid off in 7.4 years, $7,892 total interest
-Avalanche saves $421 vs Snowball
-```
+### Step 3: Enter Your Data
+- Fill in your financial information
+- **Your data auto-saves** as you type (stored in your browser)
+- Close the tab anytime—your data will be there when you return
+- Works completely **offline** after the first load
 
 ---
 
-## 📖 How It Works
+## 💾 Where is My Data Saved?
+
+Your data is saved in your browser's **localStorage**:
+- **Location:** Stored on your computer (inside your browser)
+- **Privacy:** Never uploaded to the internet
+- **Persistence:** Stays saved until you clear your browser data
+- **Per-device:** Each computer/browser stores data independently
+- **Backup:** Export to CSV (Student Loans) or take screenshots
+
+**To clear your data:** Clear your browser's cache/cookies for this site.
+
+
+---
+
+## 🧮 How the Calculators Work
 
 ### Budget Planner
-The budget calculator converts bi-weekly paychecks to monthly equivalents using the accurate formula:
+**The Problem:** You're paid every 2 weeks, but bills are monthly. How do you budget?
 
+**The Solution:** The calculator uses this formula:
 ```
-Monthly Net Pay = (Bi-weekly Pay × 26) / 12
+Monthly Income = (Bi-weekly Paycheck × 26 paychecks per year) ÷ 12 months
 ```
 
-This accounts for the fact that there are 26 bi-weekly pay periods per year (not 24), giving you a true monthly average. Expenses can be reordered via drag-and-drop to prioritize categories, and all data persists automatically in your browser.
+**Why 26?** There are 52 weeks in a year, so 52 ÷ 2 = 26 paychecks (not 24!).
+
+**Example:**
+- Bi-weekly paycheck: $2,000
+- Monthly equivalent: ($2,000 × 26) ÷ 12 = **$4,333.33/month**
+
+Then you allocate that monthly amount to your expense categories.
+
+---
+
+### Commission Breakdown
+**The Problem:** You get a commission/bonus check. How should you split it?
+
+**The Solution:** Set percentage allocations for each category:
+- Student Loan Boost: 40%
+- Fun Money: 35%
+- Savings: 25%
+
+Enter your commission amount, and it automatically calculates the dollar amount for each category. The calculator ensures your percentages add up to exactly 100%.
+
+---
 
 ### Student Loan Calculator
+**The Problem:** When will I be debt-free? How much interest will I pay?
 
-#### Daily Interest Calculation
-Unlike simple calculators that use monthly interest, this tool calculates interest **daily** (365.25 days/year) for maximum accuracy:
+**The Solution:** Unlike simple calculators, this uses **daily interest accrual** (just like real loans):
 
 ```
-Daily Interest = Balance × (APR / 100) / 365.25
+Daily Interest = Current Balance × (APR ÷ 100) ÷ 365.25 days
 ```
 
-This matches how real loans accrue interest and provides precise projections.
+**How it works:**
+1. Interest is added to your balance **every single day**
+2. When a payment is due (every 14 or 30 days), it's applied to the balance
+3. Bonus payments go to the highest interest rate loan first (saves you the most money)
+4. The calculator runs day-by-day until your balance hits $0
 
-#### Payment Application
-1. **Interest accrues daily** on all loans
-2. **Scheduled payments** apply on their due dates (every 14 days for bi-weekly, 30 days for monthly)
-3. **Bonuses** apply on their schedule and target highest APR loans first (avalanche method)
-4. **Loans paid off** stop accruing interest immediately
+**Why daily interest matters:** 
+Monthly calculations can be off by hundreds of dollars. Daily calculations match how your servicer actually charges interest.
 
-#### Avalanche vs Snowball
-- **Avalanche**: Extra payments go to the highest APR loan, minimizing total interest
-- **Snowball**: Extra payments go to the smallest balance, providing psychological wins
-- **Calculator shows both** so you can make an informed choice
-
----
-
-## 🎯 Use Cases
-
-### Getting Your Finances in Order
-**Start with Budget Planner:**
-- See exactly where your money goes each month
-- Identify how much you can allocate to debt payoff
-- Organize expenses by priority with drag-and-drop
-- Track spending vs income in real-time
-
-**Then use Student Loan Calculator:**
-- Model different payment amounts using budget surplus
-- Test "what if" scenarios (e.g., "What if I pay an extra $100/month?")
-- Compare bi-weekly vs monthly payment strategies
-
-### Tax Season Planning
-**Budget Planner:** Adjust for seasonal income changes
-**Loan Calculator:**
-- Plan how to allocate your tax refund
-- See exactly how much a one-time payment accelerates payoff
-- Model quarterly bonus injections from side income
-
-### Making Financial Decisions
-**Refinancing Analysis:**
-- Calculate current payoff timeline and total interest
-- Compare with refinancing offers (manually adjust APR)
-- See if lower rates justify refinancing costs
-
-**Debt-Free Goal Setting:**
-- Set a target payoff date
-- Calculate required monthly payment to hit your goal
-- Use budget planner to find areas to cut expenses
-- Track progress by updating balances as you pay down loans
+**Avalanche vs Snowball:**
+- **Avalanche:** Pay off highest interest rate first → saves the most money
+- **Snowball:** Pay off smallest balance first → psychological motivation
+- The calculator shows **both** strategies so you can decide
 
 ---
 
-## 🛠️ Features Deep Dive
+---
 
-### Budget Planner Features
+## 💡 Real-World Examples
 
-**Drag-and-Drop Reordering:**
-- Click and drag any expense category to reorder
-- Prioritize your most important expenses at the top
-- Order is automatically saved
+### Example 1: First Time Budgeting
+**Situation:** You just graduated and got your first job. You're paid $2,500 every two weeks after taxes.
 
-**Real-Time Calculations:**
-- Budget usage percentage with color-coded progress bar
-- Green (0-75%): Healthy budget
-- Orange (75-100%): Approaching limit
-- Red (>100%): Over budget—time to adjust
-
-**Auto-Save:**
-- Every change saves instantly to localStorage
-- Close and reopen anytime—your budget persists
-- No manual save button needed
-
-### Student Loan Calculator Features
-
-**Managing Multiple Loans:**
-- Click **"+ Add Another Loan"** to add up to 20+ loans
-- Each loan tracks independently with its own APR and payment schedule
-- Delete loans with the × button
-- All loans automatically save
-
-### Bonus Injections
-- Add recurring bonuses (quarterly bonuses, annual tax refunds)
-- Add one-time payments (inheritance, side hustle income)
-- Bonuses automatically apply to highest APR loan first for maximum benefit
-- Track exactly how bonuses accelerate your payoff
-
-### Saved Scenarios
-- Save current setup with a name (e.g., "Aggressive 2026")
-- Load any saved scenario with one click
-- Compare different strategies by switching between scenarios
-- Delete old scenarios you no longer need
-
-### Exporting Data
-- **CSV Export**: Download complete payment schedule
-  - Columns: Month, Balance, Interest Paid, Principal Paid, Bonus Payments
-  - Import into Excel, Google Sheets, or any spreadsheet tool
-- **Print**: Use browser print for immediate PDF reports
+**How to use:**
+1. Open **Budget Planner**
+2. Enter bi-weekly pay: $2,500
+3. See monthly equivalent: **$5,416.67**
+4. Add your expenses:
+   - Rent: $1,500
+   - Groceries: $400
+   - Car Payment: $350
+   - Utilities: $150
+   - Savings (20%): $1,083.33
+   - Student Loan: $500
+5. **Result:** You have $1,433.34 left over → adjust categories or increase savings
 
 ---
 
-## 🔧 Technical Details
+### Example 2: Bonus Commission Split
+**Situation:** You just got a $5,000 commission check. You want to be smart about how you spend it.
 
-### Architecture
-- **Multi-page application**: Each calculator is a separate HTML file
-- **Shared navigation**: Unified hamburger menu (`assets/js/navigation.js`)
-- **Independent data**: Each tool uses separate localStorage keys
-- **No build process**: Pure HTML/CSS/JS—works offline
+**How to use:**
+1. Open **Commission Breakdown**
+2. Enter commission: $5,000
+3. Set your percentages:
+   - Student Loans: 40% → **$2,000**
+   - Emergency Fund: 30% → **$1,500**
+   - Fun Money: 20% → **$1,000**
+   - Retirement: 10% → **$500**
+4. **Result:** Clear plan for your money before you spend it
 
-### Built With
-- **Vanilla JavaScript**: No frameworks—fast and lightweight
-- **Tailwind CSS**: Modern, responsive design via CDN
-- **Lucide Icons**: Lightweight icon library
-- **Chart.js**: Interactive payoff visualization (loan calculator)
-- **localStorage API**: Client-side data persistence
+---
+
+### Example 3: Student Loan Payoff Plan
+**Situation:** You have $30,000 in student loans at 5.5% APR. You can afford $175 every two weeks.
+
+**How to use:**
+1. Open **Student Loan Calculator**
+2. Enter loan balance: $30,000
+3. Enter APR: 5.5%
+4. Enter payment: $175 bi-weekly
+5. **Result:** 
+   - Paid off in: **Jul 2031** (7.4 years)
+   - Total interest: **$7,892**
+6. **Test bonus:** Add $500 quarterly bonus
+   - **New result:** Paid off in **May 2030** (6.1 years)
+   - **Total interest:** $6,420
+   - **You save:** $1,472 with bonuses!
+
+---
+
+### Example 4: Tax Refund Strategy
+**Situation:** You're getting a $2,000 tax refund. Should you put it toward loans or save it?
+
+**How to use:**
+1. Open **Student Loan Calculator**
+2. Add one-time bonus: $2,000
+3. See how many months earlier you'll be debt-free
+4. See how much interest you save
+5. Make an informed decision based on real numbers
+
+
+---
+
+## 🖥️ Technical Requirements
+
+### What You Need
+- **Any modern web browser:**
+  - Google Chrome (recommended)
+  - Microsoft Edge
+  - Firefox
+  - Safari
+- **No internet connection** (after initial download)
+- **No software installation**
+- **No account or login**
 
 ### File Structure
 ```
 personal-finance-calculators/
-├── index.html              # Budget Planner (landing page)
-├── student-loans.html      # Student Loan Calculator
-├── assets/
-│   └── js/
-│       └── navigation.js   # Shared hamburger menu
-└── README.md
+├── index.html                    # Budget Planner (start here)
+├── commission-breakdown.html     # Commission Calculator
+├── student-loans.html            # Student Loan Calculator
+└── README.md                     # This file
 ```
 
-### Browser Compatibility
-- ✅ Chrome/Edge (recommended)
-- ✅ Firefox
-- ✅ Safari
-- ✅ Mobile browsers (responsive design)
+### How Data is Stored
+- **Where:** In your browser's localStorage (on your computer)
+- **How much:** Up to 10MB (plenty for financial data)
+- **How long:** Until you manually clear your browser data
+- **Sharing:** Each browser on each device has its own separate data
+- **Backup:** Export to CSV or take screenshots
 
-### Data Storage
-- Uses browser `localStorage` (5-10MB available)
-- Each calculator has independent storage:
-  - Budget: `budget_planner_state_v1`
-  - Loans: `student_loan_calculator_state_v2`, `student_loan_scenarios_v2`
-- Data persists until you clear browser data
-- Each browser/device stores independently
-- Export to CSV for backup
-
----
-
-## 📱 Mobile Support
-
-Fully responsive design optimized for:
-- 📱 **Phones**: Touch-friendly inputs, collapsible sections
-- 💻 **Tablets**: Side-by-side loan comparison
-- 🖥️ **Desktops**: Full feature set with large data table
-
----
-
-## 🤝 Contributing
-
-Contributions welcome! Ideas for new calculators and features:
-
-### New Calculator Ideas:
-- 🏡 Mortgage affordability calculator
-- 💳 Credit card payoff planner
-- 📈 Investment compound interest calculator
-- 🚗 Auto loan vs lease comparison
-- 💼 Retirement savings tracker
-
-### Feature Improvements:
-- PDF export with charts and summary reports
-- Payment strategy optimizer (suggest optimal amounts)
-- Federal IDR (Income-Driven Repayment) calculator
-- PSLF (Public Service Loan Forgiveness) tracker
-- Tax deduction estimator
-- Data import from CSV files
-- Dark mode toggle
-
----
 
 ## 📄 License
 
@@ -284,45 +277,67 @@ MIT License - Free to use, modify, and distribute.
 
 ---
 
-## 🙋 FAQ
+---
 
-**Q: Is my data secure?**  
-A: Yes! All calculations happen in your browser. Nothing is sent to any server. Your financial data stays 100% private on your device.
+## ❓ Frequently Asked Questions
 
-**Q: Do the calculators share data with each other?**  
-A: No, each calculator has independent localStorage. This keeps your data organized and prevents conflicts.
+### Is my financial data safe?
+**Yes!** All calculations happen on your computer. Your data **never leaves your device**. No servers, no uploads, no accounts. 100% private.
 
-**Q: Can I use the loan calculator for other types of debt?**  
-A: Yes! Works for any installment loan: car loans, personal loans, mortgages (though mortgage calculators have specialized features like escrow).
+### Will my data be there when I come back?
+**Yes!** Everything auto-saves to your browser's localStorage. Close the tab, shut down your computer—when you reopen the file, your data will be exactly as you left it.
 
-**Q: Why are loan results different from my servicer's website?**  
-A: This calculator uses daily interest accrual, which is more accurate. Servicer calculators often use simplified monthly calculations or may include fees not modeled here.
+### What happens if I clear my browser data?
+Your saved information will be deleted. To prevent data loss, export to CSV (Student Loans) or take screenshots of your budgets.
 
-**Q: What if I can't afford my current payments?**  
-A: The loan calculator will warn you if payments don't cover interest (interest-only or negative amortization). Consider income-driven repayment plans or refinancing.
+### Can I use this on my phone?
+**Yes!** All calculators are mobile-friendly. Just open the HTML files in your phone's browser (Chrome, Safari, etc.).
 
-**Q: Can I save my data permanently?**  
-A: Data is saved in your browser's localStorage. To back up, export to CSV (loan calculator) or take screenshots. Clearing browser data will erase saved information.
+### Can I use this for car loans, personal loans, or credit cards?
+**Yes!** The Student Loan Calculator works for any installment loan with a fixed payment schedule. Just enter your loan details.
 
-**Q: Why does the budget use bi-weekly pay?**  
-A: Many people are paid bi-weekly (every 2 weeks = 26 paychecks/year). The calculator converts this to monthly for expense planning: (Bi-weekly × 26) ÷ 12.
+### Why is my result different from my loan servicer's website?
+This calculator uses **daily interest accrual** (the most accurate method). Many servicer websites use simplified monthly calculations. Daily calculations are more precise and match how loans actually work.
 
-**Q: Does bi-weekly loan payment really save money?**  
-A: Yes! Bi-weekly payments result in 26 payments/year (13 months) vs 12 monthly payments, plus interest accrues less frequently.
+### Do I need to be online to use this?
+**No!** After the first load (which downloads Tailwind CSS and icons from CDN), everything works offline. Perfect for privacy and when you don't have internet.
+
+### Why bi-weekly payments instead of monthly?
+Many people are paid every 2 weeks (26 paychecks/year), not twice a month (24 paychecks/year). This calculator accounts for that difference. For loans, bi-weekly payments result in one extra month of payments per year, which saves you money on interest!
+
+### Can I share this with friends/family?
+**Absolutely!** Just send them the folder or GitHub link. Each person's data stays separate on their own device.
 
 ---
 
-## 📞 Support
+---
 
-- **Issues**: Report bugs or request features via GitHub Issues
-- **Questions**: Open a discussion on the repository
+## 📄 License
+
+**MIT License** - Free to use, modify, and share.
 
 ---
 
-## 🎉 Acknowledgments
+## 💬 Questions or Feedback?
 
-Built for anyone working toward financial freedom and better money management. Whether you're budgeting your first paycheck or strategizing your final loan payment, these tools are here to help. 💪
+- **Found a bug?** Open an issue on GitHub
+- **Have a feature idea?** Submit a feature request
+- **Want to contribute?** Pull requests welcome!
 
 ---
 
-**Made with ❤️ for your financial journey**
+## 🎯 Summary
+
+**Personal Finance Calculators** is a suite of three privacy-focused tools that run **100% locally on your computer**:
+
+1. **Budget Planner** - Convert bi-weekly paychecks to monthly budgets
+2. **Commission Breakdown** - Split bonuses into percentage allocations
+3. **Student Loan Calculator** - Calculate payoff dates with daily interest accuracy
+
+**No installation. No accounts. No cloud. Just open and use.**
+
+Your financial data stays on your device, where it belongs. 🔒
+
+---
+
+**Built for your financial journey** 💪
