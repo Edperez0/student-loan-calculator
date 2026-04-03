@@ -6,6 +6,7 @@
   <title>Student Loan Payoff Certainty Calculator</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
@@ -859,9 +860,141 @@ function runDailySimulation(loanData, bonuses, maxDays, strategy = 'avalanche') 
       link.click();
     }
 
-    function exportToPDF() {
-      alert('PDF export coming soon! For now, use CSV or print this page (Ctrl+P / Cmd+P).');
-      // TODO: Implement jsPDF export
+    async function exportToPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // Get current data
+      const loans = Array.from(document.querySelectorAll('.loan-item')).map((el, index) => {
+        return {
+          balance: parseFloat(el.querySelector('.loan-balance').value) || 0,
+          apr: parseFloat(el.querySelector('.loan-apr').value) || 0,
+          paymentAmount: parseFloat(el.querySelector('.loan-pay').value) || 0,
+          freq: el.querySelector('.loan-pay-freq')?.value || "biweekly"
+        };
+      });
+
+      const bonuses = Array.from(document.querySelectorAll('.bonus-item')).map(el => ({
+        amount: parseFloat(el.querySelector('.bonus-amount').value) || 0,
+        freq: el.querySelector('.bonus-freq').value
+      }));
+
+      const result = runDailySimulation(loans, bonuses, MAX_DAYS, 'avalanche');
+      const payoffDate = document.getElementById('stat-date').innerText;
+      const totalInterest = document.getElementById('stat-interest').innerText;
+      const savings = document.getElementById('stat-savings').innerText;
+
+      // Title
+      doc.setFontSize(20);
+      doc.setTextColor(102, 126, 234);
+      doc.text('Student Loan Payoff Report', 105, 20, { align: 'center' });
+
+      doc.setFontSize(10);
+      doc.setTextColor(100, 100, 100);
+      doc.text(`Generated: ${new Date().toLocaleDateString()}`, 105, 28, { align: 'center' });
+
+      // Summary Stats
+      doc.setFontSize(12);
+      doc.setTextColor(0, 0, 0);
+      let yPos = 45;
+
+      doc.text('Summary', 20, yPos);
+      yPos += 8;
+      doc.setFontSize(10);
+      doc.text(`Debt-Free Date: ${payoffDate}`, 20, yPos);
+      yPos += 6;
+      doc.text(`Total Interest Paid: ${totalInterest}`, 20, yPos);
+      yPos += 6;
+      doc.text(`Interest Saved (with bonuses): ${savings}`, 20, yPos);
+      yPos += 12;
+
+      // Loan Details
+      doc.setFontSize(12);
+      doc.text('Your Loans', 20, yPos);
+      yPos += 8;
+      doc.setFontSize(9);
+
+      loans.forEach((loan, i) => {
+        doc.text(`Loan ${i + 1}: $${loan.balance.toLocaleString()} @ ${loan.apr}% APR`, 25, yPos);
+        yPos += 5;
+        doc.text(`Payment: $${loan.paymentAmount} ${loan.freq}`, 25, yPos);
+        yPos += 7;
+      });
+
+      // Bonuses
+      if (bonuses.length > 0 && bonuses[0].amount > 0) {
+        yPos += 5;
+        doc.setFontSize(12);
+        doc.text('Bonus Payments', 20, yPos);
+        yPos += 8;
+        doc.setFontSize(9);
+
+        bonuses.forEach((bonus, i) => {
+          doc.text(`${bonus.freq}: $${bonus.amount}`, 25, yPos);
+          yPos += 6;
+        });
+      }
+
+      // Add chart to PDF
+      yPos += 10;
+      if (yPos > 200) {
+        doc.addPage();
+        yPos = 20;
+      }
+
+      doc.setFontSize(12);
+      doc.text('Payoff Progress Chart', 20, yPos);
+      yPos += 8;
+
+      // Get chart as image
+      const canvas = document.getElementById('payoffChart');
+      const chartImage = canvas.toDataURL('image/png');
+      doc.addImage(chartImage, 'PNG', 20, yPos, 170, 80);
+      yPos += 90;
+
+      // Payment Schedule (first 12 months)
+      if (yPos > 220) {
+        doc.addPage();
+        yPos = 20;
+      }
+
+      doc.setFontSize(12);
+      doc.text('Payment Schedule (First 12 Months)', 20, yPos);
+      yPos += 8;
+      doc.setFontSize(8);
+
+      // Table headers
+      doc.text('Month', 20, yPos);
+      doc.text('Balance', 60, yPos);
+      doc.text('Interest', 100, yPos);
+      doc.text('Principal', 140, yPos);
+      yPos += 5;
+
+      // Draw header line
+      doc.line(20, yPos, 180, yPos);
+      yPos += 5;
+
+      // Table rows (first 12 months)
+      const schedule = result.monthlySchedule.slice(0, 12);
+      schedule.forEach(row => {
+        if (yPos > 280) {
+          doc.addPage();
+          yPos = 20;
+        }
+        doc.text(row.month, 20, yPos);
+        doc.text(`$${Math.max(0, row.balance).toFixed(0)}`, 60, yPos);
+        doc.text(`$${(row.interest || 0).toFixed(2)}`, 100, yPos);
+        doc.text(`$${(row.paid || 0).toFixed(2)}`, 140, yPos);
+        yPos += 6;
+      });
+
+      // Footer
+      doc.setFontSize(8);
+      doc.setTextColor(150, 150, 150);
+      doc.text('Generated by Student Loan Payoff Calculator', 105, 285, { align: 'center' });
+
+      // Save
+      doc.save(`loan-payoff-report-${new Date().toISOString().split('T')[0]}.pdf`);
     }
 
     // ============ LOCALSTORAGE PERSISTENCE ============
