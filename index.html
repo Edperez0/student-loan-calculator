@@ -157,9 +157,23 @@
         </div>
 
         <div class="glass-card rounded-2xl shadow-sm overflow-hidden">
-          <div class="p-4 border-b bg-slate-50/50 flex justify-between items-center">
+          <div class="p-4 border-b bg-slate-50/50 flex justify-between items-center flex-wrap gap-2">
             <h3 class="font-bold text-slate-700 text-sm">Monthly Projected Schedule</h3>
-            <span id="duration-tag" class="text-[10px] font-bold px-3 py-1 bg-blue-100 text-blue-600 rounded-full uppercase"></span>
+            <div class="flex gap-2 items-center">
+              <button id="export-csv" class="px-3 py-1 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-all text-xs font-bold uppercase flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                CSV
+              </button>
+              <button id="export-pdf" class="px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all text-xs font-bold uppercase flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                PDF
+              </button>
+              <span id="duration-tag" class="text-[10px] font-bold px-3 py-1 bg-blue-100 text-blue-600 rounded-full uppercase"></span>
+            </div>
           </div>
           <div class="overflow-x-auto max-h-[450px] custom-scrollbar">
             <table class="w-full text-left border-collapse">
@@ -740,6 +754,44 @@ function runDailySimulation(loanData, bonuses, maxDays) {
       });
     }
 
+    // ============ EXPORT FUNCTIONS ============
+    function exportToCSV() {
+      const loans = Array.from(document.querySelectorAll('.loan-item')).map((el, index) => {
+        return {
+          balance: parseFloat(el.querySelector('.loan-balance').value) || 0,
+          apr: parseFloat(el.querySelector('.loan-apr').value) || 0,
+          paymentAmount: parseFloat(el.querySelector('.loan-pay').value) || 0,
+          freq: el.querySelector('.loan-pay-freq')?.value || "biweekly"
+        };
+      });
+
+      const bonuses = Array.from(document.querySelectorAll('.bonus-item')).map(el => ({
+        amount: parseFloat(el.querySelector('.bonus-amount').value) || 0,
+        freq: el.querySelector('.bonus-freq').value
+      }));
+
+      const result = runDailySimulation(loans, bonuses, MAX_DAYS);
+      const schedule = result.monthlySchedule;
+
+      // Build CSV content
+      let csv = 'Month,Balance,Interest Paid,Principal Paid,Bonus Payments\n';
+      schedule.forEach(row => {
+        csv += `"${row.month}",${Math.max(0, row.balance).toFixed(2)},${(row.interest || 0).toFixed(2)},${(row.paid || 0).toFixed(2)},${(row.bonus || 0).toFixed(2)}\n`;
+      });
+
+      // Download
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `loan-payoff-schedule-${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
+    }
+
+    function exportToPDF() {
+      alert('PDF export coming soon! For now, use CSV or print this page (Ctrl+P / Cmd+P).');
+      // TODO: Implement jsPDF export
+    }
+
     // ============ LOCALSTORAGE PERSISTENCE ============
     function saveToLocalStorage() {
       const loans = Array.from(document.querySelectorAll('.loan-item')).map(el => ({
@@ -777,6 +829,10 @@ function runDailySimulation(loanData, bonuses, maxDays) {
       calculate();
       saveToLocalStorage();
     });
+
+    // Export button handlers
+    document.getElementById('export-csv').addEventListener('click', exportToCSV);
+    document.getElementById('export-pdf').addEventListener('click', exportToPDF);
 
     // Scenario button handlers
     document.getElementById('save-scenario').addEventListener('click', () => {
