@@ -39,14 +39,18 @@
         <p class="text-slate-500 pt-1 text-sm">Track your spending based on your projected monthly earnings.</p>
       </div>
 
-      <div class="relative flex items-start">
+      <div class="relative flex items-start shrink-0">
         <button
           id="hamburger-btn"
           class="bg-white border border-slate-200 rounded-lg p-2 shadow-sm hover:bg-slate-50"
           aria-label="Open menu"
           onclick="toggleMenu()"
         >
-          <i data-lucide="menu" class="w-5 h-5 text-slate-700"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
         </button>
         <div
           id="hamburger-menu"
