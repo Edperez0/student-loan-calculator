@@ -41,12 +41,13 @@
       }
 
       .mobile-bottom-nav {
-        display: flex;
+        display: flex !important;
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 1000;
+        z-index: 9999;
+        padding-bottom: env(safe-area-inset-bottom);
       }
       /* Bug 3 fix: Hide sticky summary to avoid duplicate result cards */
       .mobile-sticky-summary {
@@ -59,13 +60,9 @@
       .lg\:grid-cols-3,
       .grid.lg\:grid-cols-3,
       .grid.md\:grid-cols-3,
+      .grid.grid-cols-2,
       #strategy-comparison .grid.md\:grid-cols-2 {
         grid-template-columns: 1fr;
-      }
-
-      .grid.grid-cols-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
         gap: clamp(8px, 2vw, 16px);
       }
 
@@ -131,10 +128,18 @@
       .overflow-x-auto {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        width: 100%;
+        display: block;
       }
 
       .overflow-x-auto table {
-        min-width: 650px;
+        min-width: 500px;
+        width: 100%;
+      }
+
+      .p-4.bg-slate-50.border-b.flex {
+        flex-wrap: wrap;
+        gap: clamp(8px, 2vw, 12px);
       }
 
       #stat-date, #stat-interest, #stat-savings {
@@ -207,7 +212,6 @@
     /* Hide mobile elements on desktop */
     .mobile-bottom-nav {
       display: none;
-      padding-bottom: env(safe-area-inset-bottom);
     }
 
     .mobile-sticky-summary { display: none; }

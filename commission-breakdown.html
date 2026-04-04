@@ -37,12 +37,13 @@
       }
 
       .mobile-bottom-nav {
-        display: flex;
+        display: flex !important;
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 1000;
+        z-index: 9999;
+        padding-bottom: env(safe-area-inset-bottom);
       }
       .mobile-sticky-summary {
         display: flex;
@@ -117,7 +118,6 @@
 
     .mobile-bottom-nav {
       display: none;
-      padding-bottom: env(safe-area-inset-bottom);
     }
 
     .mobile-sticky-summary,
@@ -187,7 +187,6 @@
         <div class="flex items-center gap-3">
           <span id="allocation-status" class="text-xs font-semibold text-slate-400">Allocation must total 100%</span>
           <button
-            onclick="addAllocation()"
             class="add-category-btn text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg flex items-center justify-center gap-1 transition-colors"
           >
             <i data-lucide="plus" class="w-4 h-4"></i>
@@ -639,13 +638,21 @@
     updateCommission();
     lucide.createIcons();
 
-    // Bug 5 fix: Ensure Add Category button works on touch devices
+    // Fix Add Category button for both desktop and mobile
     const addBtn = document.querySelector('.add-category-btn');
     if (addBtn) {
+      // Handle touch devices
       addBtn.addEventListener('touchend', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         addAllocation();
       }, { passive: false });
+
+      // Handle desktop click
+      addBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        addAllocation();
+      });
     }
   </script>
 </body>
