@@ -106,10 +106,10 @@
         opacity: 1;
       }
 
-      /* Mobile reorder buttons */
+      /* Mobile reorder buttons - True 44x44px touch targets */
       .mobile-reorder-btn {
         min-width: 44px;
-        min-height: 22px;
+        min-height: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -118,8 +118,9 @@
         color: #64748b;
         padding: 0;
         cursor: pointer;
-        touch-action: manipulation;
+        touch-action: none;
         transition: color 0.2s ease;
+        position: relative;
       }
 
       .mobile-reorder-btn:not(:disabled):active {
@@ -129,6 +130,14 @@
 
       .mobile-reorder-btn:disabled {
         pointer-events: none;
+      }
+
+      /* Container for arrow buttons */
+      .mobile-reorder-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        flex-shrink: 0;
       }
 
       .mobile-card-container > div {
@@ -584,9 +593,12 @@
             card.innerHTML = `
               <div class="flex items-start justify-between mb-3">
                 <div class="flex items-center gap-2 flex-1">
-                  <div class="flex flex-col gap-1">
+                  <div class="mobile-reorder-container">
                     <button
-                      onclick="moveAllocationUp('${item.id}')"
+                      onclick="event.stopPropagation(); moveAllocationUp('${item.id}')"
+                      ontouchstart="event.stopPropagation()"
+                      ontouchmove="event.stopPropagation()"
+                      ontouchend="event.stopPropagation()"
                       class="mobile-reorder-btn ${isFirst ? 'opacity-30 cursor-not-allowed' : ''}"
                       ${isFirst ? 'disabled' : ''}
                       aria-label="Move up"
@@ -594,7 +606,10 @@
                       <i data-lucide="chevron-up" class="w-5 h-5"></i>
                     </button>
                     <button
-                      onclick="moveAllocationDown('${item.id}')"
+                      onclick="event.stopPropagation(); moveAllocationDown('${item.id}')"
+                      ontouchstart="event.stopPropagation()"
+                      ontouchmove="event.stopPropagation()"
+                      ontouchend="event.stopPropagation()"
                       class="mobile-reorder-btn ${isLast ? 'opacity-30 cursor-not-allowed' : ''}"
                       ${isLast ? 'disabled' : ''}
                       aria-label="Move down"

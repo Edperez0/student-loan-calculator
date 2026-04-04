@@ -193,10 +193,10 @@
         color: white !important;
       }
 
-      /* Mobile reorder buttons */
+      /* Mobile reorder buttons - True 44x44px touch targets */
       .mobile-reorder-btn {
         min-width: 44px;
-        min-height: 22px;
+        min-height: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -205,8 +205,9 @@
         color: #64748b;
         padding: 0;
         cursor: pointer;
-        touch-action: manipulation;
+        touch-action: none;
         transition: color 0.2s ease;
+        position: relative;
       }
 
       .mobile-reorder-btn:not(:disabled):active {
@@ -216,6 +217,14 @@
 
       .mobile-reorder-btn:disabled {
         pointer-events: none;
+      }
+
+      /* Container for arrow buttons */
+      .mobile-reorder-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        flex-shrink: 0;
       }
 
       .swipe-container {
@@ -711,9 +720,12 @@
           row.innerHTML = `
             <div class="flex items-start justify-between mb-3">
               <div class="flex items-center gap-2 flex-1">
-                <div class="flex flex-col gap-1">
+                <div class="mobile-reorder-container">
                   <button
-                    onclick="moveCategoryUp('${cat.id}')"
+                    onclick="event.stopPropagation(); moveCategoryUp('${cat.id}')"
+                    ontouchstart="event.stopPropagation()"
+                    ontouchmove="event.stopPropagation()"
+                    ontouchend="event.stopPropagation()"
                     class="mobile-reorder-btn ${isFirst ? 'opacity-30 cursor-not-allowed' : ''}"
                     ${isFirst ? 'disabled' : ''}
                     aria-label="Move up"
@@ -721,7 +733,10 @@
                     <i data-lucide="chevron-up" class="w-5 h-5"></i>
                   </button>
                   <button
-                    onclick="moveCategoryDown('${cat.id}')"
+                    onclick="event.stopPropagation(); moveCategoryDown('${cat.id}')"
+                    ontouchstart="event.stopPropagation()"
+                    ontouchmove="event.stopPropagation()"
+                    ontouchend="event.stopPropagation()"
                     class="mobile-reorder-btn ${isLast ? 'opacity-30 cursor-not-allowed' : ''}"
                     ${isLast ? 'disabled' : ''}
                     aria-label="Move down"
@@ -768,9 +783,12 @@
           let isSwiping = false;
 
           row.addEventListener("touchstart", (e) => {
-            // Don't start swiping if touching toggle buttons or input
+            // Don't start swiping if touching buttons, inputs, or reorder controls
             const target = e.target;
-            if (target.closest('.toggle-buttons') || target.closest('input')) {
+            if (target.closest('.toggle-buttons') ||
+                target.closest('input') ||
+                target.closest('.mobile-reorder-btn') ||
+                target.closest('.mobile-reorder-container')) {
               isSwiping = false;
               return;
             }
