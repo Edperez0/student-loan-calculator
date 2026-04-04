@@ -20,7 +20,7 @@
     }
 
     /* Mobile-specific styles */
-    @media (max-width: 767px) {
+    @media (max-width: 768px) {
       /* Hide top nav on mobile */
       nav.sticky { display: none; }
 
@@ -37,18 +37,172 @@
       /* Bigger touch targets for inputs and selects */
       input[type="text"], input[type="number"], select {
         padding: 0.75rem !important;
-        font-size: 1rem !important;
+        font-size: 16px !important;
+        min-height: 44px !important;
       }
 
       /* Compact header */
       header h1 { font-size: 1.5rem !important; }
 
+      /* Stack main grid layout vertically */
+      .grid.lg\\:grid-cols-3 {
+        grid-template-columns: 1fr !important;
+      }
+
+      .lg\\:col-span-1,
+      .lg\\:col-span-2 {
+        grid-column: span 1 !important;
+      }
+
+      /* Stack stat cards vertically */
+      .grid.md\\:grid-cols-3 {
+        grid-template-columns: 1fr !important;
+      }
+
       /* Make stat cards stack better */
-      .stat-card { flex-direction: column; gap: 0.5rem; }
+      .stat-card {
+        flex-direction: row !important;
+        gap: 1rem !important;
+      }
+
+      /* Stack strategy comparison cards */
+      #strategy-comparison .grid.md\\:grid-cols-2 {
+        grid-template-columns: 1fr !important;
+      }
 
       /* Better button sizing */
       button {
-        min-height: 44px;
+        min-height: 44px !important;
+      }
+
+      /* Full-width cards with consistent padding */
+      .rounded-2xl, .rounded-xl {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      /* Tighter spacing between sections */
+      .space-y-6 > * + * {
+        margin-top: 1rem !important;
+      }
+
+      /* Export buttons container */
+      .flex.gap-2.items-center {
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+      }
+
+      /* Better horizontal scrolling for table */
+      .overflow-x-auto {
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* Progress bars full width */
+      .w-full {
+        width: 100% !important;
+      }
+
+      /* Typography - ensure no clipping */
+      h1, h2, h3 {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+
+      /* Scale down large numbers if needed */
+      #stat-date, #stat-interest, #stat-savings {
+        font-size: clamp(0.875rem, 4vw, 1.125rem) !important;
+      }
+
+      /* Add/Delete loan buttons proper sizing */
+      #add-loan, #add-bonus {
+        min-height: 44px !important;
+        padding: 12px 16px !important;
+      }
+
+      /* Scenario save button */
+      #save-scenario {
+        min-height: 44px !important;
+      }
+
+      /* Export buttons better sizing */
+      #export-csv, #export-pdf {
+        min-height: 44px !important;
+        padding: 12px 16px !important;
+      }
+
+      /* Consistent section padding */
+      section.rounded-2xl {
+        padding: 16px !important;
+      }
+
+      /* Spacing between loan/bonus items */
+      .loan-item, .bonus-item {
+        padding: 16px !important;
+        margin-bottom: 16px !important;
+      }
+
+      /* Warning block full width */
+      #loan-warning-block {
+        padding: 16px !important;
+        margin-bottom: 1rem !important;
+      }
+
+      /* Strategy comparison readable on mobile */
+      #strategy-comparison {
+        padding: 16px !important;
+      }
+
+      #strategy-comparison .p-4 {
+        padding: 16px !important;
+      }
+
+      /* Chart container proper height */
+      .h-80 {
+        height: 300px !important;
+      }
+
+      /* Table header sticky on mobile */
+      thead.sticky {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 10 !important;
+      }
+    }
+
+    /* Navigation tabs - horizontal scroll on mobile */
+    @media (max-width: 768px) {
+      nav.sticky .flex {
+        overflow-x: auto !important;
+        flex-wrap: nowrap !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      nav.sticky .flex::-webkit-scrollbar {
+        display: none;
+      }
+
+      nav.sticky a {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+
+      /* Main content container proper padding */
+      .p-4 {
+        padding: 16px !important;
+      }
+
+      /* Ensure no horizontal overflow anywhere */
+      body, html {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+      }
+
+      * {
+        max-width: 100% !important;
       }
     }
 
@@ -76,7 +230,7 @@
   <!-- Sticky Navigation Bar -->
   <nav class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
     <div class="max-w-5xl mx-auto px-4 md:px-8 py-4">
-      <div class="flex flex-wrap items-center gap-2">
+      <div class="flex items-center gap-2">
         <a href="index.html" class="px-4 py-2 rounded-full font-semibold text-sm transition-all text-slate-700 hover:bg-slate-100">
           Budget Planner
         </a>
