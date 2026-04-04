@@ -262,26 +262,29 @@
         font-weight: 600;
       }
 
-      .space-y-6 > * + *,
-      .space-y-4 > * + * {
-        margin-top: clamp(16px, 4vw, 20px) !important;
-      }
-
-      /* Fix gap between sections on mobile */
+      /* Synchronize mobile grid gap to match card spacing */
       .grid.grid-cols-1.lg\:grid-cols-3 {
+        display: grid;
         gap: clamp(16px, 4vw, 20px);
       }
 
-      /* Even spacing for mobile cards */
-      .mobile-input-card,
-      .bg-white.rounded-2xl {
-        margin-bottom: clamp(16px, 4vw, 20px);
-      }
-
-      /* Ensure consistent spacing for all sections */
+      /* Remove space-y utilities on mobile to prevent double-counting with grid gap */
       .lg\:col-span-2.space-y-4,
       .space-y-6 {
+        display: flex;
+        flex-direction: column;
         gap: clamp(16px, 4vw, 20px);
+      }
+
+      /* Override Tailwind's space-y margin on mobile */
+      .space-y-6 > * + *,
+      .space-y-4 > * + * {
+        margin-top: 0 !important;
+      }
+
+      /* Even spacing for mobile input card */
+      .mobile-input-card {
+        margin-bottom: clamp(16px, 4vw, 20px);
       }
 
       .rounded-2xl, .rounded-xl {
@@ -469,7 +472,7 @@
         </div>
       </div>
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-          <h2 class="text-lg font-bold mb-4 text-slate-800">Financial Summary</h2>
+          <h2 class="text-lg font-bold mb-4 text-slate-800">Budget Breakdown</h2>
 
           <div class="space-y-4">
             <div class="flex justify-between items-end">
