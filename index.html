@@ -141,6 +141,8 @@
         border-radius: clamp(12px, 3vw, 16px);
         padding: clamp(12px, 4vw, 20px);
         margin-bottom: clamp(12px, 3vw, 16px);
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
       }
 
       .category-card-mobile {
@@ -217,8 +219,14 @@
         font-weight: 600;
       }
 
-      .space-y-6 > * + * {
-        margin-top: clamp(12px, 3vw, 20px);
+      .space-y-6 > * + *,
+      .space-y-4 > * + * {
+        margin-top: clamp(12px, 3vw, 16px) !important;
+      }
+
+      /* Fix gap between sections on mobile */
+      .grid.grid-cols-1.lg\:grid-cols-3 {
+        gap: clamp(12px, 3vw, 16px);
       }
 
       .rounded-2xl, .rounded-xl {
@@ -691,6 +699,12 @@
           let isSwiping = false;
 
           row.addEventListener("touchstart", (e) => {
+            // Don't start swiping if touching toggle buttons or input
+            const target = e.target;
+            if (target.closest('.toggle-buttons') || target.closest('input')) {
+              isSwiping = false;
+              return;
+            }
             startX = e.touches[0].clientX;
             isSwiping = true;
           });
