@@ -50,8 +50,20 @@
       /* Ensure main containers are fully fluid */
       .p-4.md\:p-8,
       .max-w-5xl {
-        width: 100%;
-        box-sizing: border-box;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding-left: clamp(12px, 4vw, 20px) !important;
+        padding-right: clamp(12px, 4vw, 20px) !important;
+      }
+
+      /* Sidebar column must be fluid */
+      .lg\:col-span-1,
+      .lg\:col-span-2 {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
       }
 
       .mobile-bottom-nav {
@@ -85,23 +97,45 @@
       /* Specifically target loan and bonus item grids */
       .loan-item .grid.grid-cols-2,
       .bonus-item .grid.grid-cols-2 {
-        display: grid;
+        display: grid !important;
         grid-template-columns: 1fr !important;
-        gap: clamp(12px, 3vw, 16px);
+        gap: clamp(8px, 2vw, 12px) !important;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      /* Force all direct children divs to be full width */
+      .loan-item .grid > div,
+      .bonus-item .grid > div {
+        width: 100% !important;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
       }
 
       /* Keep col-span-2 items full width */
       .loan-item .col-span-2,
       .bonus-item .col-span-2 {
         grid-column: 1 / -1;
+        width: 100% !important;
       }
 
       input, select, textarea {
-        font-size: max(16px, 1vw);
-        width: 100%;
-        padding: clamp(10px, 2.5vw, 14px);
-        border-radius: clamp(8px, 2vw, 12px);
-        min-height: clamp(44px, 10vw, 52px);
+        font-size: max(16px, 1vw) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: clamp(10px, 2.5vw, 14px) !important;
+        border-radius: clamp(8px, 2vw, 12px) !important;
+        min-height: clamp(44px, 10vw, 52px) !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+      }
+
+      /* Override Tailwind's p-2 class specifically for inputs */
+      input.p-2,
+      select.p-2,
+      textarea.p-2 {
+        padding: clamp(8px, 2vw, 12px) !important;
       }
 
       button {
@@ -207,17 +241,46 @@
       section,
       .rounded-2xl,
       .rounded-xl {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-        overflow: hidden;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+
+      /* Force section padding to be responsive */
+      section.p-6 {
+        padding: clamp(12px, 4vw, 24px) !important;
       }
 
       /* Grid containers must be fully fluid */
       .grid {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Override Tailwind gap classes that might cause overflow */
+      .gap-3,
+      .gap-4,
+      .gap-8 {
+        gap: clamp(8px, 2vw, 12px) !important;
+      }
+
+      /* Loan and bonus containers must be fully fluid */
+      #loan-container,
+      #bonus-container,
+      .space-y-4 {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Loan and bonus items */
+      .loan-item,
+      .bonus-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
       }
 
       /* Loan and bonus inputs - all full width and fluid */
@@ -229,14 +292,17 @@
       .bonus-amount,
       .bonus-freq {
         width: 100% !important;
-        max-width: 100%;
-        box-sizing: border-box;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
       }
 
       /* Input labels */
       label {
-        width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
         display: block;
+        box-sizing: border-box;
       }
 
       /* Add buttons full width */
