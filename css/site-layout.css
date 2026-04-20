@@ -602,3 +602,16 @@ body.tb-nav-open {
 @media (min-width: 480px) and (max-width: 639px) {
   .device-save-chip .lock-pill > span { display: inline; }
 }
+
+/* === Phase 5: defensive collapse for two-column rows on mobile ===
+ * Tailwind's md:grid-cols-2 already collapses to 1 col below 768px because
+ * the base `grid-cols-1` utility is paired in every page. This rule is a
+ * safety net so any inline override or future Tailwind-CDN drift can't
+ * accidentally split the row on a phone-sized viewport. */
+@media (max-width: 767px) {
+  .grid.md\:grid-cols-2,
+  .grid.md\:grid-cols-3,
+  .grid.md\:grid-cols-4 {
+    grid-template-columns: 1fr !important;
+  }
+}
