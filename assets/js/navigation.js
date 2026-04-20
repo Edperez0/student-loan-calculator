@@ -18,9 +18,9 @@ function initNavigation() {
             </a>
           </li>
           <li>
-            <a href="student-loans.html" class="nav-link flex items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-all">
-              <span class="text-2xl">🎓</span>
-              <span class="font-medium">Student Loan Payoff</span>
+            <a href="loan-payoff.html" class="nav-link flex items-center gap-3 p-3 rounded-lg hover:bg-slate-700 transition-all">
+              <span class="text-2xl">📉</span>
+              <span class="font-medium">Loan Payoff</span>
             </a>
           </li>
           <li class="pt-4 border-t border-slate-700">

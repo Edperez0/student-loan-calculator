@@ -23,8 +23,8 @@ Converts bi-weekly paychecks into monthly budgets and tracks expenses across cat
 ### 2. Bonus Breakdown (`commission-breakdown.html`)
 Splits bonuses or commission checks into percentage-based allocations (e.g., 40% to loans, 35% to savings, 25% to fun). Validates that percentages total 100%.
 
-### 3. Student Loan Payoff Calculator (`student-loans.html`)
-Calculates loan payoff dates using **daily interest accrual** (the most accurate method). Compare avalanche vs. snowball strategies, test bonus payments, and export payment schedules to CSV.
+### 3. Loan Payoff Calculator (`loan-payoff.html`)
+Calculates payoff dates for **any loan type** (student, auto, personal, mortgage, and more) using **daily interest accrual**. Compare avalanche vs. snowball strategies, test bonus payments, and export payment schedules to CSV.
 
 ---
 
@@ -43,7 +43,7 @@ Calculates loan payoff dates using **daily interest accrual** (the most accurate
    - Or open any of the three HTML files directly:
      - `index.html` - Budget Planner
      - `commission-breakdown.html` - Bonus Breakdown
-     - `student-loans.html` - Student Loan Calculator
+     - `loan-payoff.html` - Loan Payoff Calculator
 
 3. **Navigate between calculators**
    - Use the menu pills at the top to switch between tools
@@ -61,7 +61,7 @@ Calculates loan payoff dates using **daily interest accrual** (the most accurate
 - **Offline:** Works completely offline after first load
 - **Per-device:** Each browser stores data independently
 
-**Backup:** Export payment schedules to CSV (Student Loans) or take screenshots of your budgets.
+**Backup:** Export payment schedules to CSV (Loan Payoff) or take screenshots of your budgets.
 
 ---
 
@@ -80,7 +80,7 @@ Calculates loan payoff dates using **daily interest accrual** (the most accurate
 
 - **Vanilla HTML/CSS/JavaScript** - No framework dependencies
 - **Tailwind CSS** - Loaded from CDN for styling
-- **Chart.js** - Visualization for loan payoff (Student Loan Calculator)
+- **Chart.js** - Visualization for loan payoff (Loan Payoff Calculator)
 - **localStorage** - Client-side data persistence
 - **Google Analytics** - Basic usage tracking (no personal data collected)
 
@@ -92,7 +92,7 @@ Calculates loan payoff dates using **daily interest accrual** (the most accurate
 personal-finance-calculators/
 ├── index.html                    # Budget Planner
 ├── commission-breakdown.html     # Bonus Calculator
-├── student-loans.html            # Student Loan Calculator
+├── loan-payoff.html              # Loan Payoff Calculator
 ├── assets/                       # Images and icons
 └── README.md                     # This file
 ```
