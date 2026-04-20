@@ -27,9 +27,9 @@
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "TransparentBudget Bonus Breakdown",
+    "name": "TransparentBudget Bonus & Commission Breakdown Calculator",
     "url": "https://transparentbudget.com/commission-breakdown.html",
-    "description": "Split bonuses or commission into percentage-based buckets with instant dollar amounts.",
+    "description": "Free online bonus and commission breakdown calculator. Split any lump-sum payout into percentage buckets, see dollar amounts for each line, and keep your allocation plan on track—100% private in your browser.",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Any",
     "offers": {
@@ -116,6 +116,9 @@
       line-height: 1.65;
       color: #475569;
     }
+
+    .ad-slot { min-height: 90px; margin: 32px 0; }
+    .email-capture-slot { margin: 24px 0; min-height: 0; }
 
     @media (max-width: 768px) {
       body {
@@ -307,6 +310,7 @@
     <div class="max-w-5xl mx-auto">
       <div class="seo-intro mb-8" aria-labelledby="seo-bonus-heading">
         <h1 id="seo-bonus-heading">Bonus Breakdown</h1>
+        <p class="text-sm text-slate-500 mt-2">Last updated: April 2026</p>
       </div>
 
     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8">
@@ -327,10 +331,11 @@
     </div>
 
     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-      <div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+      <div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between flex-wrap gap-2">
         <h2 class="font-semibold text-slate-700">Bonus Allocation</h2>
         <div class="flex items-center gap-3">
           <span id="allocation-status" class="text-xs font-semibold text-slate-400">Allocation must total 100%</span>
+          <button type="button" onclick="resetBonusCalculator()" class="text-sm font-medium text-slate-500 hover:text-blue-600 px-2 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Reset</button>
           <button
             class="add-category-btn text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg flex items-center justify-center gap-1 transition-colors"
           >
@@ -369,28 +374,46 @@
       </div>
     </div>
 
+      <div class="ad-slot max-w-5xl mx-auto px-0" data-slot="after-results"></div>
+
       <section class="seo-intro mb-8 max-w-5xl mx-auto px-0" aria-labelledby="about-bonus-heading">
         <h2 id="about-bonus-heading" class="text-xl font-bold text-slate-800 mb-3">About This Calculator</h2>
         <p>Split a single bonus or commission check into clear percentage buckets—debt, savings, investing, fun—so you see exact dollar amounts before you spend. It is for anyone who gets irregular lump-sum pay and wants a disciplined plan without spreadsheets. Your entries stay in this browser only.</p>
       </section>
 
+      <section class="max-w-5xl mx-auto px-0 mb-8" aria-labelledby="related-bonus-heading">
+        <h2 id="related-bonus-heading" class="text-xl font-bold text-slate-800 mb-4">Related Calculators</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <a href="index.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
+            <h3 class="font-bold text-slate-800">Budget Planner</h3>
+            <p class="text-sm text-slate-600 mt-1">Build a monthly plan from bi-weekly or twice-a-month pay with category spending you control.</p>
+          </a>
+          <a href="loan-payoff.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
+            <h3 class="font-bold text-slate-800">Loan Payoff</h3>
+            <p class="text-sm text-slate-600 mt-1">Model balances, payments, bonuses, and avalanche vs snowball to see your debt-free date.</p>
+          </a>
+        </div>
+      </section>
+
+      <div class="email-capture-slot max-w-5xl mx-auto px-0"></div>
+
       <section class="seo-faq max-w-5xl mx-auto px-0" aria-labelledby="faq-bonus-heading">
         <h2 id="faq-bonus-heading">Frequently Asked Questions</h2>
         <details>
           <summary>How are bonuses taxed?</summary>
-          <div class="faq-answer">Bonuses are ordinary income, so federal and state withholding often applies at a flat supplemental rate (commonly 22% federally) unless your employer uses your W-4 to aggregate pay. FICA also applies up to applicable wage caps. Your actual tax bill depends on your total year income, credits, and deductions—use this calculator for allocation planning, then confirm withholding with payroll or a tax pro.</div>
+          <div class="faq-answer">Bonuses count as ordinary wages, so employers usually withhold federal income tax—often at the IRS supplemental rate of 22% for large lump sums—or they may combine the bonus with your regular check and use your W-4. Social Security and Medicare still apply up to the usual wage limits. Your true tax owed depends on your full-year income, deductions, and credits, so treat withholding as a starting point and verify with payroll or a tax professional before you lock in how much of the bonus you spend.</div>
         </details>
         <details>
           <summary>How should I split my bonus paycheck?</summary>
-          <div class="faq-answer">Start with must-pay items (taxes you will owe beyond withholding, emergency fund floor, high-interest debt minimums), then assign intentional percentages to savings, investments, and lifestyle. Many people prioritize wiping out double-digit APR debt before funding taxable investing. This tool lets you model percentages until they total 100% so you can commit before the money hits checking.</div>
+          <div class="faq-answer">Cover non-negotiables first: extra tax you may owe beyond withholding, minimum payments on high-cost debt, and a minimum emergency cushion if you are below three months of expenses. Then assign intentional percentages to savings, investments, and lifestyle until the rows add to 100%. Seeing dollar amounts beside each percentage makes it easier to agree on a plan with a partner or coach yourself before the money hits your checking account.</div>
         </details>
         <details>
           <summary>Should I put my bonus in savings or investments?</summary>
-          <div class="faq-answer">If you lack three to six months of core expenses in cash, building or topping off a high-yield savings account usually comes first. Once that base exists, long-term goals (401(k), IRA, brokerage) can take a larger slice, especially if your interest costs are low. There is no single right split—use the percentages here to stress-test how aggressive each choice feels.</div>
+          <div class="faq-answer">If you do not yet have several months of core expenses in a safe account, topping off savings usually beats chasing market returns. Once that base is solid, you can tilt more toward retirement accounts or brokerage investing, especially if your highest APR debt is under control. There is no single correct split—use this tool to model a few mixes and pick the one that feels sustainable when markets or life get noisy.</div>
         </details>
         <details>
-          <summary>Can I use this for commission checks?</summary>
-          <div class="faq-answer">Yes. Enter the net or gross commission amount you want to plan from, then treat each row as a bucket the same way you would for a bonus. If commissions vary month to month, run a new scenario each time you are paid so your allocation matches the actual check size.</div>
+          <summary>Can I use this calculator for commission checks?</summary>
+          <div class="faq-answer">Yes. Enter the net or gross commission you want to plan from and use each row as a bucket the same way you would for a bonus. If your commission changes every month, run a fresh scenario whenever you get paid so your percentages match the actual check. You can rename categories to match how you think about your money—tax reserve, draw account, or equipment—without changing the math.</div>
         </details>
       </section>
     </div>
@@ -425,19 +448,9 @@
     <div class="max-w-5xl mx-auto px-4 md:px-8">
       <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm text-slate-500 pb-28 md:pb-0">
         <div class="flex items-center gap-2">
-          <span>Built by <a href="https://github.com/Edperez0" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 transition-colors font-semibold">Eduardo Perez</a></span>
-          <a href="https://github.com/Edperez0" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-600 transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          </a>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-lg">🔒</span>
+          <span class="text-lg" aria-hidden="true">🔒</span>
           <span>100% Private. Data stays on your device.</span>
         </div>
-        <a href="https://buymeacoffee.com/edperez" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-amber-600 hover:text-amber-800 transition-colors font-semibold">
-          <span class="text-lg">☕</span>
-          <span>Buy me a coffee</span>
-        </a>
         <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs w-full md:w-auto border-t border-slate-100 pt-4 md:border-t-0 md:pt-0 md:pl-4 md:border-l md:border-slate-200">
           <a href="about.html" class="hover:text-blue-600">About</a>
           <span class="text-slate-300" aria-hidden="true">·</span>
@@ -449,7 +462,8 @@
 
   <script>
 
-    const STORAGE_KEY = 'commission_breakdown_state_v1';
+    const STORAGE_KEY = 'tb_bonus_inputs';
+    const LEGACY_STORAGE_KEY = 'commission_breakdown_state_v1';
 
     const DEFAULT_ALLOCATIONS = [
       { id: 'a1', name: 'Student Loan Boost', percent: 40 },
@@ -498,7 +512,11 @@
     }
 
     function loadState() {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      let raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        raw = localStorage.getItem(LEGACY_STORAGE_KEY);
+        if (raw) localStorage.setItem(STORAGE_KEY, raw);
+      }
       const data = safeParseJSON(raw);
       if (!data) return;
 
@@ -913,6 +931,18 @@
       }
 
       updateMobileSummary();
+    }
+
+    function resetBonusCalculator() {
+      if (!confirm('Clear all bonus breakdown data saved in this browser?')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(LEGACY_STORAGE_KEY);
+      allocations = [...DEFAULT_ALLOCATIONS];
+      const input = document.getElementById('commission-input');
+      if (input) input.value = '5505.77';
+      renderRows();
+      updateCommission();
+      saveState();
     }
 
     loadState();

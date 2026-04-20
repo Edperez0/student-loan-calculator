@@ -528,6 +528,10 @@
       color: #475569;
     }
 
+    .ad-slot { min-height: 90px; margin: 32px 0; }
+    .email-capture-slot { margin: 24px 0; min-height: 0; }
+    .affiliate-slot { margin: 24px 0; min-height: 0; }
+
     /* Hide mobile elements on desktop */
     .mobile-bottom-nav {
       display: none;
@@ -580,6 +584,7 @@
       <!-- Header -->
       <div class="seo-intro mb-8" aria-labelledby="seo-loan-heading">
         <h1 id="seo-loan-heading">Loan Payoff Calculator</h1>
+        <p class="text-sm text-slate-500 mt-2">Last updated: April 2026</p>
       </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -588,12 +593,15 @@
 
         <!-- Loans Input -->
         <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-          <h2 class="text-lg font-bold mb-4 text-slate-800 flex items-center gap-2">
+          <div class="flex items-center justify-between gap-2 mb-4">
+            <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
               <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12V11.23a4.002 4.002 0 003.076 3.883l3.228 1.384a1 1 0 00.788 0l3.228-1.384a4.002 4.002 0 003.076-3.883V10.12l1.69-.723a1 1 0 000-1.838l-7-3a1 1 0 00-.788 0l-7 3a1 1 0 000 1.838l1.69.723z" />
             </svg>
             Loans
-          </h2>
+            </h2>
+            <button type="button" onclick="resetLoanCalculator()" class="text-sm font-medium text-slate-500 hover:text-blue-600 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors shrink-0">Reset</button>
+          </div>
 
           <div id="loan-container" class="space-y-4">
             <div class="loan-item border-b border-slate-100 pb-4 last:border-0 relative">
@@ -688,37 +696,29 @@
 
       <!-- Main Panel -->
       <div class="lg:col-span-2 space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="stat-card bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex items-center gap-4">
-            <div class="bg-blue-100 p-2 rounded-lg text-blue-600">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
+        <div class="rounded-2xl border border-slate-200 bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-50/80 p-6 md:p-10 text-center shadow-sm">
+          <div class="flex flex-col md:flex-row flex-wrap justify-center items-stretch md:items-center gap-8 md:gap-14">
+            <div class="min-w-0 flex-1 md:max-w-md">
+              <p class="text-xs font-semibold uppercase text-slate-500 tracking-tight mb-2">Debt-free date</p>
+              <p id="stat-date" class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-700 tracking-tight leading-tight break-words">Calculating...</p>
             </div>
-            <div>
-              <p class="text-xs font-semibold uppercase text-slate-400 tracking-tight">Loan Payoff Date</p>
-              <p id="stat-date" class="text-lg font-bold text-slate-800">Calculating...</p>
-            </div>
-          </div>
-          <div class="stat-card bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex items-center gap-4">
-            <div class="bg-red-100 p-2 rounded-lg text-red-600">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs font-semibold uppercase text-slate-400 tracking-tight">Total Interest</p>
-              <p id="stat-interest" class="text-lg font-bold text-slate-800">$0</p>
+            <div class="hidden md:block w-px self-stretch bg-slate-200 min-h-[4rem]" aria-hidden="true"></div>
+            <div class="min-w-0 flex-1 md:max-w-xs text-left md:text-center">
+              <p class="text-xs font-semibold uppercase text-slate-500 tracking-tight mb-2">Total interest</p>
+              <p id="stat-interest" class="text-2xl md:text-3xl font-bold text-slate-800">$0</p>
             </div>
           </div>
-          <div class="stat-card bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex items-center gap-4">
+        </div>
+        <div class="affiliate-slot" data-slot="loan-results"></div>
+        <div class="flex justify-center">
+          <div class="stat-card bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex items-center gap-4 w-full max-w-md">
             <div class="bg-green-100 p-2 rounded-lg text-green-600">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
             <div>
-              <p class="text-xs font-semibold uppercase text-slate-400 tracking-tight">Interest Saved</p>
+              <p class="text-xs font-semibold uppercase text-slate-400 tracking-tight">Interest saved</p>
               <p id="stat-savings" class="text-lg font-bold text-green-600">$0</p>
             </div>
           </div>
@@ -807,10 +807,28 @@
       </div>
     </div>
 
+    <div class="ad-slot max-w-5xl mx-auto px-0" data-slot="after-results"></div>
+
     <section class="seo-intro mb-8 max-w-5xl mx-auto px-0" aria-labelledby="about-loan-heading">
       <h2 id="about-loan-heading" class="text-xl font-bold text-slate-800 mb-3">About This Calculator</h2>
       <p>Model payoff dates using daily interest, optional extra payments, and avalanche or snowball ordering—whether you are tackling student debt, a car note, a personal loan, or high-APR cards. TransparentBudget runs entirely in your browser so balances and scenarios never leave your device.</p>
     </section>
+
+    <section class="max-w-5xl mx-auto px-0 mb-8" aria-labelledby="related-loan-heading">
+      <h2 id="related-loan-heading" class="text-xl font-bold text-slate-800 mb-4">Related Calculators</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="index.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
+          <h3 class="font-bold text-slate-800">Budget Planner</h3>
+          <p class="text-sm text-slate-600 mt-1">Plan monthly spending from bi-weekly or twice-a-month paychecks with category totals.</p>
+        </a>
+        <a href="commission-breakdown.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
+          <h3 class="font-bold text-slate-800">Bonus Breakdown</h3>
+          <p class="text-sm text-slate-600 mt-1">Allocate a bonus or commission check across taxes, savings, debt, and spending as percentages.</p>
+        </a>
+      </div>
+    </section>
+
+    <div class="email-capture-slot max-w-5xl mx-auto px-0"></div>
 
     <section class="seo-faq max-w-5xl mx-auto px-0" aria-labelledby="faq-loan-heading">
       <h2 id="faq-loan-heading">Frequently Asked Questions</h2>
@@ -865,19 +883,9 @@
     <div class="max-w-5xl mx-auto px-4 md:px-8">
       <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm text-slate-500 pb-28 md:pb-0">
         <div class="flex items-center gap-2">
-          <span>Built by <a href="https://github.com/Edperez0" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 transition-colors font-semibold">Eduardo Perez</a></span>
-          <a href="https://github.com/Edperez0" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-600 transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          </a>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-lg">🔒</span>
+          <span class="text-lg" aria-hidden="true">🔒</span>
           <span>100% Private. Data stays on your device.</span>
         </div>
-        <a href="https://buymeacoffee.com/edperez" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-amber-600 hover:text-amber-800 transition-colors font-semibold">
-          <span class="text-lg">☕</span>
-          <span>Buy me a coffee</span>
-        </a>
         <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs w-full md:w-auto border-t border-slate-100 pt-4 md:border-t-0 md:pt-0 md:pl-4 md:border-l md:border-slate-200">
           <a href="about.html" class="hover:text-blue-600">About</a>
           <span class="text-slate-300" aria-hidden="true">·</span>
@@ -888,6 +896,14 @@
   </footer>
 
   <script>
+    const TB_LOAN_INPUTS_KEY = 'tb_loan_inputs';
+    const LEGACY_LOAN_DATA_KEY = 'studentLoanData';
+
+    const DEFAULT_LOAN_INPUTS = {
+      loans: [{ balance: '30000', apr: '5.5', payment: '175', freq: 'biweekly' }],
+      bonuses: [{ label: 'Quarterly Bonus', amount: '500', freq: 'quarterly' }],
+    };
+
     const MAX_DAYS = 480 * 30; // ~40 years
     const BALANCE_EPSILON = 0.01;
     let chartInstance = null;
@@ -1680,21 +1696,33 @@ function runDailySimulation(loanData, bonuses, maxDays, strategy = 'avalanche') 
         freq: el.querySelector('.bonus-freq').value
       }));
 
-      localStorage.setItem('studentLoanData', JSON.stringify({ loans, bonuses, savedAt: new Date().toISOString() }));
+      localStorage.setItem(TB_LOAN_INPUTS_KEY, JSON.stringify({ loans, bonuses, savedAt: new Date().toISOString() }));
     }
 
     function loadFromLocalStorage() {
-      const saved = localStorage.getItem('studentLoanData');
+      const legacy = localStorage.getItem(LEGACY_LOAN_DATA_KEY);
+      const saved = localStorage.getItem(TB_LOAN_INPUTS_KEY) || legacy;
       if (!saved) return false;
 
       try {
-        const data = JSON.parse(saved);
-        applyDataToUI(data);
+        applyDataToUI(JSON.parse(saved));
+        if (legacy) {
+          saveToLocalStorage();
+          localStorage.removeItem(LEGACY_LOAN_DATA_KEY);
+        }
         return true;
       } catch (e) {
-        console.error('Failed to load saved data:', e);
         return false;
       }
+    }
+
+    function resetLoanCalculator() {
+      if (!confirm('Clear all loan inputs saved in this browser and reset to the default example?')) return;
+      localStorage.removeItem(TB_LOAN_INPUTS_KEY);
+      localStorage.removeItem(LEGACY_LOAN_DATA_KEY);
+      applyDataToUI(DEFAULT_LOAN_INPUTS);
+      calculate();
+      saveToLocalStorage();
     }
 
     // Auto-save on every input
@@ -1722,12 +1750,9 @@ function runDailySimulation(loanData, bonuses, maxDays, strategy = 'avalanche') 
 
     // Load saved data on page load, then calculate
     window.onload = () => {
-      const loaded = loadFromLocalStorage();
+      loadFromLocalStorage();
       renderScenariosList();
       calculate();
-      if (loaded) {
-        console.log('💾 Loaded saved loan data');
-      }
     };
   </script>
 </body>
