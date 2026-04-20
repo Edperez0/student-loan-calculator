@@ -91,7 +91,8 @@ button svg, a svg, .stat-card__icon svg, .lock-pill svg, .tb-info svg {
   flex: 1 1 auto;
 }
 .page-title-row h1 {
-  font-size: var(--text-3xl);
+  /* 26px floor at ~375px viewport, 40px (var(--text-3xl)) ceiling on desktop */
+  font-size: clamp(1.625rem, 5.5vw, var(--text-3xl));
   font-weight: 800;
   letter-spacing: -0.025em;
   color: var(--color-ink);
@@ -100,7 +101,8 @@ button svg, a svg, .stat-card__icon svg, .lock-pill svg, .tb-info svg {
 }
 .page-title-row .page-last-updated {
   color: var(--color-ink-soft);
-  font-size: var(--text-sm);
+  /* 13px floor on mobile, var(--text-sm) (14px) ceiling on desktop */
+  font-size: clamp(0.8125rem, 2.8vw, var(--text-sm));
   margin: 0;
 }
 .page-title-row .page-subhead {
@@ -528,4 +530,48 @@ button svg, a svg, .stat-card__icon svg, .lock-pill svg, .tb-info svg {
 
 body.tb-nav-open {
   overflow: hidden;
+}
+
+/* === Phase 3: page header tweaks on mobile ===
+ * The page title row keeps its desktop layout above 640px. Below that the
+ * "Saved to this device" chip shrinks to icon-only (text reappears at >= 480px
+ * if there's room) and the row aligns center-vertically so the chip sits
+ * inline with the H1 baseline. */
+.page-h1-supertag {
+  display: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.6875rem;        /* 11px */
+  font-weight: 700;
+  color: var(--color-ink-muted);
+  margin: 0 0 0.25rem;
+}
+.page-h1-short { display: none; }
+.page-h1-full { display: inline; }
+
+@media (max-width: 639px) {
+  .page-title-row {
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  .page-title-row .page-title-stack {
+    flex: 1 1 0;
+  }
+  .device-save-chip {
+    font-size: 0.6875rem;
+    flex-shrink: 0;
+  }
+  /* Icon-only on the smallest phones */
+  .device-save-chip .lock-pill > span { display: none; }
+
+  /* Paycheck H1 swap: hide the long full title, show the short label.
+     The supertag (uppercase eyebrow) sits above. */
+  .page-h1-full { display: none; }
+  .page-h1-short { display: inline; }
+  .page-h1-supertag { display: block; }
+}
+
+/* Bring back the chip text once there's enough horizontal room. */
+@media (min-width: 480px) and (max-width: 639px) {
+  .device-save-chip .lock-pill > span { display: inline; }
 }
