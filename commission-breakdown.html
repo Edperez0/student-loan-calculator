@@ -124,32 +124,9 @@
 
     @media (max-width: 768px) {
       body {
-        padding-top: clamp(48px, 12vw, 60px);
-        padding-bottom: clamp(70px, 18vw, 90px);
         font-size: clamp(14px, 3.5vw, 16px);
       }
 
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 9999;
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-      .mobile-sticky-summary {
-        display: flex;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: white;
-        border-bottom: 1px solid #eee;
-        padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 24px);
-        font-size: clamp(13px, 3vw, 15px);
-      }
-
-      nav.sticky { display: none; }
       header h1 { font-size: clamp(18px, 5vw, 28px); }
 
       table { display: none !important; }
@@ -264,26 +241,14 @@
       }
     }
 
-    .mobile-bottom-nav {
-      display: none;
-    }
-
-    .mobile-sticky-summary,
     .mobile-card-container { display: none; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans flex flex-col min-h-screen" data-active-nav="bonus">
-  <!-- Mobile Sticky Summary (hidden on desktop) -->
-  <div class="mobile-sticky-summary fixed top-0 left-0 right-0 bg-white border-b border-slate-200 shadow-sm z-40 px-4 py-3">
-    <div class="flex items-center justify-between text-sm">
-      <div>
-        <span class="text-slate-500 text-xs">Bonus:</span>
-        <span id="mobile-bonus-display" class="font-bold text-slate-800 ml-1">$0</span>
-      </div>
-      <div class="text-right">
-        <span id="mobile-status-display" class="font-bold text-slate-600 text-xs">0% allocated</span>
-      </div>
-    </div>
+  <!-- Hidden mirrors retained for compatibility with existing JS handlers. -->
+  <div hidden aria-hidden="true">
+    <span id="mobile-bonus-display"></span>
+    <span id="mobile-status-display"></span>
   </div>
 
   <!-- Site nav (injected from /partials/header.html) -->
@@ -298,23 +263,6 @@
         </div>
         <div data-include="page-header"></div>
       </header>
-
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6">
-      <label class="text-xs font-semibold uppercase text-slate-400 block tracking-tight mb-2">
-        Bonus Check
-      </label>
-      <div class="flex items-center gap-2">
-        <span class="text-lg font-bold">$</span>
-        <input
-          id="commission-input"
-          type="number"
-          value="5505.77"
-          class="text-lg font-bold focus:outline-none w-40 bg-transparent"
-          oninput="updateCommission(); saveState();"
-        />
-      </div>
-      <p class="text-xs text-slate-400">Applies to this bonus payout only.</p>
-    </div>
 
     <!-- Stat cards row -->
     <section class="stat-row" aria-label="Bonus summary">
@@ -360,6 +308,23 @@
             Add New
           </button>
         </div>
+      </div>
+
+      <!-- Compact bonus check input (replaces former full-width hero card). -->
+      <div class="px-4 py-3 bg-white border-b border-slate-100 flex items-center gap-3">
+        <label for="commission-input" class="text-xs font-semibold uppercase text-slate-400 tracking-tight whitespace-nowrap">
+          Bonus check
+        </label>
+        <span class="text-base font-bold">$</span>
+        <input
+          id="commission-input"
+          type="number"
+          value="5505.77"
+          step="0.01"
+          class="text-base font-bold w-32 bg-slate-50 border border-slate-200 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          oninput="updateCommission(); saveState();"
+        />
+        <span class="text-xs text-slate-400 hidden sm:inline">Applies to this payout only.</span>
       </div>
 
       <div class="overflow-x-auto">
@@ -434,7 +399,7 @@
 
       <section class="max-w-5xl mx-auto px-0 mb-8" aria-labelledby="related-bonus-heading">
         <h2 id="related-bonus-heading" class="text-xl font-bold text-slate-800 mb-4">Related Calculators</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <a href="index.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
             <h3 class="font-bold text-slate-800">Budget Planner</h3>
             <p class="text-sm text-slate-600 mt-1">Build a monthly plan from bi-weekly or twice-a-month pay with category spending you control.</p>
@@ -442,10 +407,6 @@
           <a href="loan-payoff.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
             <h3 class="font-bold text-slate-800">Loan Payoff</h3>
             <p class="text-sm text-slate-600 mt-1">Model balances, payments, bonuses, and avalanche vs snowball to see your debt-free date.</p>
-          </a>
-          <a href="paycheck-calculator.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
-            <h3 class="font-bold text-slate-800">Paycheck (Gross to Net)</h3>
-            <p class="text-sm text-slate-600 mt-1">Estimate take-home pay, FICA, and state withholding from gross or net per check.</p>
           </a>
         </div>
       </section>

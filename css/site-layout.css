@@ -4,6 +4,27 @@
  * stat cards, export bar, saved scenarios) across pages.
  */
 
+/* Hide native scrollbar on the horizontally scrolling top nav. */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Inline info-icon button used in form labels (e.g. paycheck pre-tax tooltip). */
+.tb-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-ink-faint);
+  cursor: help;
+}
+.tb-info:hover, .tb-info:focus { color: var(--color-primary); outline: none; }
+.tb-info svg, .tb-info i { width: 0.875rem; height: 0.875rem; }
+
 /* Page shell — keeps top spacing identical across pages. */
 .page-shell {
   width: 100%;
@@ -146,6 +167,25 @@
 }
 .stat-card__value.is-positive { color: var(--color-success); }
 .stat-card__value.is-negative { color: var(--color-danger); }
+
+/* Mobile: shrink stat cards so 3 stacked cards stay visible above the fold. */
+@media (max-width: 767px) {
+  .stat-row {
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+  .stat-card {
+    padding: var(--space-sm) var(--space-md);
+    gap: var(--space-sm);
+  }
+  .stat-card__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  .stat-card__icon svg { width: 1rem; height: 1rem; }
+  .stat-card__label { font-size: 0.625rem; }
+  .stat-card__value { font-size: var(--text-base); }
+}
 
 /* Calculator main 65/35 grid (12-col under the hood, 8 main / 4 sidebar). */
 .calc-grid {

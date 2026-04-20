@@ -112,8 +112,6 @@
       }
 
       body {
-        padding-top: clamp(48px, 12vw, 60px);
-        padding-bottom: clamp(70px, 18vw, 90px);
         font-size: clamp(14px, 3.5vw, 16px);
       }
 
@@ -136,21 +134,6 @@
         box-sizing: border-box !important;
       }
 
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 9999;
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-      /* Bug 3 fix: Hide sticky summary to avoid duplicate result cards */
-      .mobile-sticky-summary {
-        display: none !important;
-      }
-
-      nav.sticky { display: none; }
       header h1 { font-size: clamp(18px, 5vw, 28px); }
 
       /* All grids become single column on mobile for fluid stacking */
@@ -519,45 +502,14 @@
       line-height: 1.65;
       color: #475569;
     }
-    .seo-affiliate-note {
-      margin-top: 1.75rem;
-      padding: 1rem 1.25rem;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 0.75rem;
-      font-size: 0.875rem;
-      line-height: 1.65;
-      color: #475569;
-    }
-
     .ad-slot { min-height: 90px; margin: 32px 0; }
     .email-capture-slot { margin: 24px 0; min-height: 0; }
     .affiliate-slot { margin: 24px 0; min-height: 0; }
 
-    /* Hide mobile elements on desktop */
-    .mobile-bottom-nav {
-      display: none;
-    }
-
-    .mobile-sticky-summary { display: none; }
   </style>
 </head>
 
 <body class="bg-slate-50 text-slate-900 font-sans flex flex-col min-h-screen" data-active-nav="loan">
-  <!-- Mobile Sticky Summary (hidden on desktop) -->
-  <div class="mobile-sticky-summary fixed top-0 left-0 right-0 bg-white border-b border-slate-200 shadow-sm z-40 px-4 py-3">
-    <div class="flex items-center justify-between text-sm">
-      <div>
-        <span class="text-slate-500 text-xs">Payoff Date:</span>
-        <span id="mobile-payoff-display" class="font-bold text-slate-800 ml-1">-</span>
-      </div>
-      <div class="text-right">
-        <span class="text-slate-500 text-xs">Interest:</span>
-        <span id="mobile-interest-display" class="font-bold text-red-600 ml-1">$0</span>
-      </div>
-    </div>
-  </div>
-
   <!-- Site nav (injected from /partials/header.html) -->
   <div data-include="header"></div>
 
@@ -816,7 +768,7 @@
 
     <section class="max-w-5xl mx-auto px-0 mb-8" aria-labelledby="related-loan-heading">
       <h2 id="related-loan-heading" class="text-xl font-bold text-slate-800 mb-4">Related Calculators</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <a href="index.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
           <h3 class="font-bold text-slate-800">Budget Planner</h3>
           <p class="text-sm text-slate-600 mt-1">Plan monthly spending from bi-weekly or twice-a-month paychecks with category totals.</p>
@@ -824,10 +776,6 @@
         <a href="commission-breakdown.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
           <h3 class="font-bold text-slate-800">Bonus Breakdown</h3>
           <p class="text-sm text-slate-600 mt-1">Allocate a bonus or commission check across taxes, savings, debt, and spending as percentages.</p>
-        </a>
-        <a href="paycheck-calculator.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
-          <h3 class="font-bold text-slate-800">Paycheck (Gross to Net)</h3>
-          <p class="text-sm text-slate-600 mt-1">Estimate take-home pay and taxes from gross or net per check.</p>
         </a>
       </div>
     </section>
@@ -852,9 +800,16 @@
         <summary>Does making extra payments really save money on interest?</summary>
         <div class="faq-answer">Yes, because interest accrues on the remaining principal. Every principal reduction today stops future interest from compounding on that amount. The effect is largest on high-APR revolving debt and still meaningful on lower-rate installment loans over long terms.</div>
       </details>
+      <details>
+        <summary>Would refinancing speed up my payoff?</summary>
+        <div class="faq-answer">
+          A lower APR can shave months off your timeline and cut total interest, especially on long-term installment debt like student or auto loans. Compare your current rate to today's offers before deciding &mdash; if the new rate doesn't beat your weighted average APR by enough to cover any closing or origination costs, refinancing rarely pays off.
+          <!-- AFFILIATE: Credible compare-rates link goes here once approved.
+               <a href="https://www.credible.com/" rel="sponsored noopener" target="_blank">Compare refinance rates</a>
+          -->
+        </div>
+      </details>
     </section>
-    <p class="seo-affiliate-note">Could a lower interest rate speed up your payoff date? Refinancing or consolidating your loans could save you thousands. Compare rates:</p>
-    <!-- AFFILIATE LINKS GO HERE -->
   </div>
   </div>
 
