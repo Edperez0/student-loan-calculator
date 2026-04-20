@@ -495,52 +495,14 @@
           </div>
         </div>
 
-        <!-- About / Related / FAQ — kept inside the main column so it visually
-             balances the taller sidebar on desktop and reads as one cohesive card. -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-6">
-          <section class="seo-intro" aria-labelledby="about-budget-heading">
-            <h2 id="about-budget-heading" class="text-xl font-bold text-slate-800 mb-3">About This Calculator</h2>
-            <p>TransparentBudget turns each paycheck into a realistic monthly spending plan so you can cover rent, savings, and day-to-day costs without guessing. It is built for people paid every two weeks or twice a month who still need a single monthly number for bills and goals. Everything runs in your browser and stays on your device.</p>
-          </section>
-
-          <section class="border-t border-slate-100 pt-6" aria-labelledby="related-budget-heading">
-            <h2 id="related-budget-heading" class="text-xl font-bold text-slate-800 mb-4">Related Calculators</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <a href="paycheck-calculator.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
-                <h3 class="font-bold text-slate-800">Paycheck (Gross to Net)</h3>
-                <p class="text-sm text-slate-600 mt-1">Estimate take-home pay and tax breakdown by state before you plug numbers into the budget planner.</p>
-              </a>
-              <a href="commission-breakdown.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
-                <h3 class="font-bold text-slate-800">Bonus Breakdown</h3>
-                <p class="text-sm text-slate-600 mt-1">Plan how to split a bonus or commission check into savings, debt, and spending buckets.</p>
-              </a>
-            </div>
-          </section>
-
-          <section class="seo-faq border-t border-slate-100 pt-6" aria-labelledby="faq-budget-heading">
-            <h2 id="faq-budget-heading">Frequently Asked Questions</h2>
-            <details>
-              <summary>How do I calculate my monthly budget from bi-weekly pay?</summary>
-              <div class="faq-answer">Multiply one after-tax bi-weekly check by 26 (paychecks per year), then divide by 12 to get an average monthly income that matches how lenders and planners think about per-month costs. Enter your per-check amount here with bi-weekly selected, and the planner converts it automatically while you assign categories.</div>
-            </details>
-            <details>
-              <summary>What is the 50/30/20 budgeting rule?</summary>
-              <div class="faq-answer">It is a simple split: about 50% of take-home pay for needs (housing, utilities, minimum debt payments), 30% for wants, and 20% for savings and extra debt payoff. It is a guideline, not a law—high rent cities or aggressive payoff goals may shift the percentages, but it is a useful starting point when you first map categories.</div>
-            </details>
-            <details>
-              <summary>How much should I spend on rent?</summary>
-              <div class="faq-answer">A common rule is to keep rent or mortgage under roughly 30% of gross income, and under half of take-home after taxes if cash flow is tight. Your safe number depends on other fixed costs, childcare, and savings goals—use this planner to see whether rent plus other must-pay lines still leaves room before you commit to a lease.</div>
-            </details>
-            <details>
-              <summary>What is the difference between bi-weekly and twice-a-month pay?</summary>
-              <div class="faq-answer">Bi-weekly means every 14 days, so most years you get 26 checks (two months have three checks). Twice a month usually means 24 checks on set calendar dates (for example the 1st and 15th), so each check covers half a calendar month. This tool converts either pattern into a consistent monthly budget so you are not surprised by short months.</div>
-            </details>
-          </section>
-        </div>
       </div>
 
-      <!-- Sidebar -->
-      <div class="space-y-6">
+      <!-- Sidebar — `lg:row-span-2` so the desktop 3-column grid keeps the
+           SEO card in the left two columns directly under the categories card,
+           with the sidebar tall on the right. On mobile (< 1024px) the grid
+           collapses to one column, the row-span has no effect, and source
+           order places the SEO card last. -->
+      <div class="space-y-6 lg:row-span-2">
         <!-- Income card (desktop): compact at top of sidebar with frequency toggle -->
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 desktop-only">
           <div class="flex items-start gap-3">
@@ -667,6 +629,52 @@
           <div id="scenarios-list" class="scenarios-list">
             <p class="scenarios-empty">No saved scenarios yet</p>
           </div>
+        </section>
+      </div>
+
+      <!-- About / Related / FAQ — third top-level grid item.
+           `lg:col-span-2` keeps it in the left two columns on desktop so the
+           visual rhythm matches what was here before. On mobile/tablet
+           (< 1024px) the grid collapses to one column and this card naturally
+           sits at the bottom, after the sidebar. -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-6 lg:col-span-2">
+        <section class="seo-intro" aria-labelledby="about-budget-heading">
+          <h2 id="about-budget-heading" class="text-xl font-bold text-slate-800 mb-3">About This Calculator</h2>
+          <p>TransparentBudget turns each paycheck into a realistic monthly spending plan so you can cover rent, savings, and day-to-day costs without guessing. It is built for people paid every two weeks or twice a month who still need a single monthly number for bills and goals. Everything runs in your browser and stays on your device.</p>
+        </section>
+
+        <section class="border-t border-slate-100 pt-6" aria-labelledby="related-budget-heading">
+          <h2 id="related-budget-heading" class="text-xl font-bold text-slate-800 mb-4">Related Calculators</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <a href="paycheck-calculator.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
+              <h3 class="font-bold text-slate-800">Paycheck (Gross to Net)</h3>
+              <p class="text-sm text-slate-600 mt-1">Estimate take-home pay and tax breakdown by state before you plug numbers into the budget planner.</p>
+            </a>
+            <a href="commission-breakdown.html" class="block bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all">
+              <h3 class="font-bold text-slate-800">Bonus Breakdown</h3>
+              <p class="text-sm text-slate-600 mt-1">Plan how to split a bonus or commission check into savings, debt, and spending buckets.</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="seo-faq border-t border-slate-100 pt-6" aria-labelledby="faq-budget-heading">
+          <h2 id="faq-budget-heading">Frequently Asked Questions</h2>
+          <details>
+            <summary>How do I calculate my monthly budget from bi-weekly pay?</summary>
+            <div class="faq-answer">Multiply one after-tax bi-weekly check by 26 (paychecks per year), then divide by 12 to get an average monthly income that matches how lenders and planners think about per-month costs. Enter your per-check amount here with bi-weekly selected, and the planner converts it automatically while you assign categories.</div>
+          </details>
+          <details>
+            <summary>What is the 50/30/20 budgeting rule?</summary>
+            <div class="faq-answer">It is a simple split: about 50% of take-home pay for needs (housing, utilities, minimum debt payments), 30% for wants, and 20% for savings and extra debt payoff. It is a guideline, not a law—high rent cities or aggressive payoff goals may shift the percentages, but it is a useful starting point when you first map categories.</div>
+          </details>
+          <details>
+            <summary>How much should I spend on rent?</summary>
+            <div class="faq-answer">A common rule is to keep rent or mortgage under roughly 30% of gross income, and under half of take-home after taxes if cash flow is tight. Your safe number depends on other fixed costs, childcare, and savings goals—use this planner to see whether rent plus other must-pay lines still leaves room before you commit to a lease.</div>
+          </details>
+          <details>
+            <summary>What is the difference between bi-weekly and twice-a-month pay?</summary>
+            <div class="faq-answer">Bi-weekly means every 14 days, so most years you get 26 checks (two months have three checks). Twice a month usually means 24 checks on set calendar dates (for example the 1st and 15th), so each check covers half a calendar month. This tool converts either pattern into a consistent monthly budget so you are not surprised by short months.</div>
+          </details>
         </section>
       </div>
     </div>
