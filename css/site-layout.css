@@ -615,3 +615,31 @@ body.tb-nav-open {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* === Phase 7: inputs, buttons, forms on mobile === */
+@media (max-width: 639px) {
+  /* Save Scenario row stacks vertically with full-width fields. */
+  .saved-scenarios-card .input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .saved-scenarios-card .input-row input,
+  .saved-scenarios-card .save-btn {
+    width: 100%;
+  }
+
+  /* Export bar: title above, action buttons stretch full width. The
+     three buttons share the row in equal thirds with wrap fallback. */
+  .export-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .export-bar__actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+  .export-bar__btn {
+    flex: 1 1 calc(33% - 8px);
+    justify-content: center;
+  }
+}
