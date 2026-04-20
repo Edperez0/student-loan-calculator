@@ -222,6 +222,33 @@ button svg, a svg, .stat-card__icon svg, .lock-pill svg, .tb-info svg {
   .stat-card__value { font-size: var(--text-base); }
 }
 
+/* Phase 4: tighter still on phones (<= iPhone widths). Goal is ~72px tall
+   per card so 3 stacked cards fit in roughly 240px. Icon left, label-over-
+   value column right. */
+@media (max-width: 639px) {
+  .stat-card {
+    padding: 12px;
+    gap: var(--space-sm);
+    min-height: 0;
+    max-height: 72px;
+    align-items: center;
+  }
+  .stat-card__icon {
+    width: 32px;
+    height: 32px;
+  }
+  .stat-card__icon svg { width: 18px; height: 18px; }
+  .stat-card__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .stat-card__value {
+    font-size: 22px;
+    line-height: 1.1;
+  }
+}
+
 /* Calculator main 60/40 grid: a wider results column on the left so the
    primary breakdown card has room to breathe, with a balanced sidebar. */
 .calc-grid {
