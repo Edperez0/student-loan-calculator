@@ -514,10 +514,6 @@
               >Twice a Month</button>
             </div>
           </div>
-          <div class="mt-3 flex items-center gap-2 text-blue-600 font-semibold bg-blue-50 px-3 py-1.5 rounded-full text-xs">
-            <span class="uppercase tracking-wider">Monthly:</span>
-            <span id="monthly-income-display">$0</span>
-          </div>
         </div>
 
         <!-- Combined Budget Breakdown + Budget mix card -->
@@ -1385,9 +1381,6 @@
       const netPay = payFrequency === 'bi-weekly'
         ? (paycheckAmount * 26) / 12
         : paycheckAmount * 2;
-
-      document.getElementById("monthly-income-display").innerText =
-        `$${Math.round(netPay).toLocaleString()}`;
 
       const statIncome = document.getElementById("stat-monthly-income");
       if (statIncome) statIncome.textContent = `$${Math.round(netPay).toLocaleString()}`;
