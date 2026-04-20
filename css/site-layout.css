@@ -201,6 +201,23 @@
 .calc-grid > .calc-main { min-width: 0; display: flex; flex-direction: column; gap: var(--section-gap); }
 .calc-grid > .calc-sidebar { min-width: 0; display: flex; flex-direction: column; gap: var(--section-gap); }
 
+/* Utility row beneath .calc-grid: hosts secondary controls like
+   Saved Scenarios + Export at full page width. 2/1 split on desktop,
+   stacks on mobile. Top spacing matches the inter-section gap so the
+   About card below sits flush against it. */
+.calc-utility-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gap);
+  margin-top: var(--section-gap);
+  align-items: start;
+}
+@media (min-width: 1024px) {
+  .calc-utility-row {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  }
+}
+
 /* Export bar — Share / CSV / PDF row beneath the main results area. */
 .export-bar {
   display: flex;
