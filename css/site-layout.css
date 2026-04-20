@@ -242,12 +242,17 @@
 .export-bar__btn:hover { background: #dbeafe; }
 
 /* Flush variant: lives inside another card (e.g. the loan-payoff schedule
-   card) and reads as that card's footer instead of a standalone tile. */
-.export-bar--flush {
+   card) and reads as that card's footer instead of a standalone tile.
+   Use the doubled `.export-bar.export-bar--flush` selector so we always win
+   over the base `.export-bar` rule no matter the cascade order. */
+.export-bar.export-bar--flush {
   background: #f8fafc;
   border: 0;
   border-top: 1px solid var(--color-border);
-  border-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   box-shadow: none;
   padding: var(--space-md) var(--space-lg);
 }
