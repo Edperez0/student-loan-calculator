@@ -525,22 +525,71 @@
         <div data-include="page-header"></div>
       </header>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- Sidebar: Inputs -->
-      <div class="lg:col-span-1 space-y-6">
+    <!-- Stat cards: Loan Payoff Date / Total Interest / Interest Saved.
+         Full-width below the page header so the headline numbers are the
+         first thing the reader sees. -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="stat-card bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex items-center gap-4">
+        <div class="bg-blue-100 p-2 rounded-lg text-blue-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase text-slate-400 tracking-tight">Loan Payoff Date</p>
+          <p id="stat-date" class="text-lg font-bold text-slate-800">Calculating...</p>
+        </div>
+      </div>
+      <div class="stat-card bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex items-center gap-4">
+        <div class="bg-red-100 p-2 rounded-lg text-red-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase text-slate-400 tracking-tight">Total Interest</p>
+          <p id="stat-interest" class="text-lg font-bold text-slate-800">$0</p>
+        </div>
+      </div>
+      <div class="stat-card bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex items-center gap-4">
+        <div class="bg-green-100 p-2 rounded-lg text-green-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase text-slate-400 tracking-tight">Interest Saved</p>
+          <p id="stat-savings" class="text-lg font-bold text-green-600">$0</p>
+        </div>
+      </div>
+    </div>
 
-        <!-- Loans Input -->
-        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-          <div class="flex items-center justify-between gap-2 mb-4">
-            <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12V11.23a4.002 4.002 0 003.076 3.883l3.228 1.384a1 1 0 00.788 0l3.228-1.384a4.002 4.002 0 003.076-3.883V10.12l1.69-.723a1 1 0 000-1.838l-7-3a1 1 0 00-.788 0l-7 3a1 1 0 000 1.838l1.69.723z" />
+    <div class="affiliate-slot mt-6" data-slot="loan-results"></div>
+
+    <!-- Loan Details: merged Loans + Bonus Injections card.
+         Internal 50/50 grid on desktop, stacks on mobile. All input class
+         hooks (.loan-* / .bonus-*) and container ids preserved so the JS
+         add/remove/recalc handlers continue to work. -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mt-6">
+      <div class="flex items-center justify-between gap-2 mb-4">
+        <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12V11.23a4.002 4.002 0 003.076 3.883l3.228 1.384a1 1 0 00.788 0l3.228-1.384a4.002 4.002 0 003.076-3.883V10.12l1.69-.723a1 1 0 000-1.838l-7-3a1 1 0 00-.788 0l-7 3a1 1 0 000 1.838l1.69.723z" />
+          </svg>
+          Loan Details
+        </h2>
+        <button type="button" onclick="resetLoanCalculator()" class="text-sm font-medium text-slate-500 hover:text-blue-600 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors shrink-0">Reset</button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x md:divide-slate-100">
+        <!-- Your Loan -->
+        <div class="md:pr-6">
+          <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-4 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd" />
             </svg>
-            Loans
-            </h2>
-            <button type="button" onclick="resetLoanCalculator()" class="text-sm font-medium text-slate-500 hover:text-blue-600 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors shrink-0">Reset</button>
-          </div>
-
+            Your Loan
+          </h3>
           <div id="loan-container" class="space-y-4">
             <div class="loan-item border-b border-slate-100 pb-4 last:border-0 relative">
               <div class="grid grid-cols-2 gap-3">
@@ -571,17 +620,16 @@
           </div>
 
           <button id="add-loan" class="mt-4 w-full py-2 border-2 border-dashed border-slate-300 rounded-xl text-slate-400 hover:border-blue-600 hover:text-blue-600 transition-all text-xs font-bold uppercase tracking-wider">+ Add Another Loan</button>
-        </section>
+        </div>
 
-        <!-- Bonus Section -->
-        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-          <h2 class="text-lg font-bold mb-4 text-slate-800 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-600" viewBox="0 0 20 20" fill="currentColor">
+        <!-- Bonus Injections -->
+        <div class="md:pl-6">
+          <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-4 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-600" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
             </svg>
             Bonus Injections
-          </h2>
-
+          </h3>
           <div id="bonus-container" class="space-y-4">
             <div class="bonus-item border-b border-slate-100 pb-4 last:border-0 relative">
               <div class="grid grid-cols-2 gap-3">
@@ -607,94 +655,57 @@
           </div>
 
           <button id="add-bonus" class="mt-4 w-full py-2 border-2 border-dashed border-slate-300 rounded-xl text-slate-400 hover:border-blue-600 hover:text-blue-600 transition-all text-xs font-bold uppercase tracking-wider">+ Add Another Bonus</button>
-        </section>
-      </div>
-
-      <!-- Main Panel -->
-      <div class="lg:col-span-2 space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="stat-card bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex items-center gap-4">
-            <div class="bg-blue-100 p-2 rounded-lg text-blue-600">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs font-semibold uppercase text-slate-400 tracking-tight">Loan Payoff Date</p>
-              <p id="stat-date" class="text-lg font-bold text-slate-800">Calculating...</p>
-            </div>
-          </div>
-          <div class="stat-card bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex items-center gap-4">
-            <div class="bg-red-100 p-2 rounded-lg text-red-600">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs font-semibold uppercase text-slate-400 tracking-tight">Total Interest</p>
-              <p id="stat-interest" class="text-lg font-bold text-slate-800">$0</p>
-            </div>
-          </div>
-          <div class="stat-card bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex items-center gap-4">
-            <div class="bg-green-100 p-2 rounded-lg text-green-600">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs font-semibold uppercase text-slate-400 tracking-tight">Interest Saved</p>
-              <p id="stat-savings" class="text-lg font-bold text-green-600">$0</p>
-            </div>
-          </div>
-        </div>
-        <div class="affiliate-slot" data-slot="loan-results"></div>
-
-        <div id="loan-warning-block" class="bg-white p-4 rounded-2xl shadow-sm border border-amber-200 bg-amber-50/60 hidden">
-          <p class="text-[10px] font-bold text-amber-700 uppercase tracking-widest">Payment Warning</p>
-          <p class="text-sm text-amber-800 mt-1">These loans are interest-only or negatively amortizing:</p>
-          <ul id="loan-warning-list" class="text-xs text-amber-800 mt-2 list-disc pl-4"></ul>
-        </div>
-
-        <!-- Snowball vs Avalanche Comparison -->
-        <div id="strategy-comparison" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 hidden">
-          <h3 class="text-lg font-bold text-slate-800 mb-4">💰 Debt Payoff Strategy Comparison</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
-              <div class="flex items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
-                </svg>
-                <h4 class="font-bold text-blue-900">Avalanche (Highest APR First)</h4>
-              </div>
-              <div class="space-y-1 text-sm">
-                <p class="text-blue-800"><strong>Payoff:</strong> <span id="avalanche-payoff">-</span></p>
-                <p class="text-blue-800"><strong>Total Interest:</strong> <span id="avalanche-interest">-</span></p>
-                <p class="text-xs text-blue-600 mt-2">Minimizes total interest paid (mathematically optimal)</p>
-              </div>
-            </div>
-
-            <div class="p-4 bg-purple-50 rounded-lg border-2 border-purple-200">
-              <div class="flex items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11 4a1 1 0 10-2 0v4a1 1 0 102 0V7zm-3 1a1 1 0 10-2 0v3a1 1 0 102 0V8zM8 9a1 1 0 00-2 0v2a1 1 0 102 0V9z" clip-rule="evenodd" />
-                </svg>
-                <h4 class="font-bold text-purple-900">Snowball (Smallest Balance First)</h4>
-              </div>
-              <div class="space-y-1 text-sm">
-                <p class="text-purple-800"><strong>Payoff:</strong> <span id="snowball-payoff">-</span></p>
-                <p class="text-purple-800"><strong>Total Interest:</strong> <span id="snowball-interest">-</span></p>
-                <p class="text-xs text-purple-600 mt-2">Builds momentum with quick wins (psychologically motivating)</p>
-              </div>
-            </div>
-          </div>
-          <div id="strategy-recommendation" class="mt-4 p-3 bg-emerald-50 rounded-lg border border-emerald-200 text-sm text-emerald-800"></div>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 h-80">
-          <canvas id="payoffChart"></canvas>
         </div>
       </div>
+    </section>
+
+    <!-- Balance Over Time chart, full-width. -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 h-80 mt-6">
+      <canvas id="payoffChart"></canvas>
+    </div>
+
+    <!-- Contextual analysis (warnings + strategy comparison) sit between the
+         chart and the schedule. Both blocks toggle their own visibility from
+         JS so they stay out of the way when not relevant. -->
+    <div id="loan-warning-block" class="bg-white p-4 rounded-2xl shadow-sm border border-amber-200 bg-amber-50/60 hidden mt-6">
+      <p class="text-[10px] font-bold text-amber-700 uppercase tracking-widest">Payment Warning</p>
+      <p class="text-sm text-amber-800 mt-1">These loans are interest-only or negatively amortizing:</p>
+      <ul id="loan-warning-list" class="text-xs text-amber-800 mt-2 list-disc pl-4"></ul>
+    </div>
+
+    <div id="strategy-comparison" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 hidden mt-6">
+      <h3 class="text-lg font-bold text-slate-800 mb-4">Debt Payoff Strategy Comparison</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+          <div class="flex items-center gap-2 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
+            </svg>
+            <h4 class="font-bold text-blue-900">Avalanche (Highest APR First)</h4>
+          </div>
+          <div class="space-y-1 text-sm">
+            <p class="text-blue-800"><strong>Payoff:</strong> <span id="avalanche-payoff">-</span></p>
+            <p class="text-blue-800"><strong>Total Interest:</strong> <span id="avalanche-interest">-</span></p>
+            <p class="text-xs text-blue-600 mt-2">Minimizes total interest paid (mathematically optimal)</p>
+          </div>
+        </div>
+
+        <div class="p-4 bg-purple-50 rounded-lg border-2 border-purple-200">
+          <div class="flex items-center gap-2 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11 4a1 1 0 10-2 0v4a1 1 0 102 0V7zm-3 1a1 1 0 10-2 0v3a1 1 0 102 0V8zM8 9a1 1 0 00-2 0v2a1 1 0 102 0V9z" clip-rule="evenodd" />
+            </svg>
+            <h4 class="font-bold text-purple-900">Snowball (Smallest Balance First)</h4>
+          </div>
+          <div class="space-y-1 text-sm">
+            <p class="text-purple-800"><strong>Payoff:</strong> <span id="snowball-payoff">-</span></p>
+            <p class="text-purple-800"><strong>Total Interest:</strong> <span id="snowball-interest">-</span></p>
+            <p class="text-xs text-purple-600 mt-2">Builds momentum with quick wins (psychologically motivating)</p>
+          </div>
+        </div>
+      </div>
+      <div id="strategy-recommendation" class="mt-4 p-3 bg-emerald-50 rounded-lg border border-emerald-200 text-sm text-emerald-800"></div>
     </div>
 
     <!-- Full-width Monthly Projected Schedule below the inputs/summary grid. -->
