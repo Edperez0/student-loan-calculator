@@ -75,6 +75,24 @@
     .dragging { opacity: 0.55; }
     .drop-target { outline: 2px dashed rgba(59,130,246,.45); outline-offset: -6px; }
 
+    /* Categories list: max-height is set by JS based on the 7th rendered row, so
+       longer lists scroll inside the card instead of stretching the page. */
+    .categories-scroll {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+    }
+    .categories-scroll::-webkit-scrollbar { width: 8px; }
+    .categories-scroll::-webkit-scrollbar-track { background: transparent; }
+    .categories-scroll::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 9999px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
+    .categories-scroll::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; background-clip: content-box; }
+
     .seo-intro h1 {
       font-size: 1.875rem;
       font-weight: 800;
@@ -467,8 +485,9 @@
             </div>
           </div>
 
-          <div id="categories-container" class="divide-y divide-slate-100">
-            <!-- Categories injected here -->
+          <div id="categories-container" class="divide-y divide-slate-100 categories-scroll">
+            <!-- Categories injected here. JS caps max-height at the 7th row so the
+                 list scrolls internally instead of pushing the page taller. -->
           </div>
         </div>
 
@@ -1378,7 +1397,33 @@
       });
 
       lucide.createIcons();
+      applyCategoryScrollLimit();
     }
+
+    // Cap the categories list at the height of 7 rows so longer lists scroll
+    // inside the card (mirrors the Loan Payoff "Monthly Projected Schedule").
+    function applyCategoryScrollLimit() {
+      const container = document.getElementById("categories-container");
+      if (!container) return;
+      const rows = container.children;
+      const VISIBLE = 7;
+      if (rows.length <= VISIBLE) {
+        container.style.maxHeight = "";
+        return;
+      }
+      // Sum the offsetHeight of the first 7 children (rows are uniform per
+      // breakpoint, so this stays accurate on resize/re-render).
+      let total = 0;
+      for (let i = 0; i < VISIBLE && i < rows.length; i++) {
+        total += rows[i].offsetHeight;
+      }
+      container.style.maxHeight = total + "px";
+    }
+
+    window.addEventListener("resize", () => {
+      // Row height changes between mobile/desktop layouts; recompute the cap.
+      applyCategoryScrollLimit();
+    });
 
     function updateUI() {
       const paycheckAmount = Number(document.getElementById("bi-weekly-input").value) || 0;
