@@ -13,7 +13,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6154963071737091"
      crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>Loan Payoff Calculator (Avalanche vs Snowball) | TransparentBudget</title>
   <meta name="description" content="See your exact loan payoff date. Compare avalanche vs snowball, add bonus payments, export your schedule. Free calculator." />
   <meta name="robots" content="index, follow" />
@@ -99,10 +99,12 @@
       -webkit-appearance: none;
       margin: 0;
     }
-    select {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
+    @media (min-width: 768px) {
+      select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
     }
 
     @media (max-width: 768px) {
@@ -1776,6 +1778,35 @@ function runDailySimulation(loanData, bonuses, maxDays, strategy = 'avalanche') 
       renderScenariosList();
       calculate();
     };
+  </script>
+
+  <script>
+    /* Phase 7: shorten the loan-label placeholder on phones so it doesn't
+       truncate inside the small input. Re-applies whenever a new loan or
+       bonus row is added (MutationObserver) and on resize. */
+    (function () {
+      var FULL = 'e.g., Car loan, Student loans, Visa';
+      var SHORT = 'e.g., Car loan';
+      function applyLabelPlaceholder() {
+        var isPhone = window.innerWidth < 640;
+        document.querySelectorAll('.loan-label').forEach(function (input) {
+          var current = input.getAttribute('placeholder') || '';
+          if (isPhone && current === FULL) input.setAttribute('placeholder', SHORT);
+          else if (!isPhone && current === SHORT) input.setAttribute('placeholder', FULL);
+        });
+      }
+      applyLabelPlaceholder();
+      var resizeId;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeId);
+        resizeId = setTimeout(applyLabelPlaceholder, 120);
+      });
+      ['loan-container', 'bonus-container'].forEach(function (id) {
+        var host = document.getElementById(id);
+        if (!host) return;
+        new MutationObserver(applyLabelPlaceholder).observe(host, { childList: true, subtree: true });
+      });
+    })();
   </script>
 </body>
 </html>

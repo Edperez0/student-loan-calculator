@@ -4,6 +4,39 @@
  * stat cards, export bar, saved scenarios) across pages.
  */
 
+/* === Phase 1: mobile-safe globals ===
+ * These rules apply at every viewport size but are tuned to prevent the
+ * common mobile pitfalls (horizontal page scroll, iOS auto-zoom on inputs,
+ * sub-44px tap targets, runaway media). Desktop behaviour is unaffected
+ * because the constraints are upper bounds. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+/* SVG icons inside buttons/links use width/height attrs for sizing — restore
+   the height: auto override so they don't stretch. */
+button svg, a svg, .stat-card__icon svg, .lock-pill svg, .tb-info svg {
+  height: auto;
+}
+
+@media (max-width: 639px) {
+  /* iOS Safari zooms into any input whose computed font-size < 16px. */
+  input, select, textarea {
+    font-size: 16px;
+  }
+  /* Apple HIG / Material guidance — minimum tappable target. Buttons that
+     are visually small still expand their hit area via padding. */
+  button, .btn, [role="button"], a.btn, input[type="button"], input[type="submit"] {
+    min-height: 44px;
+  }
+  /* Card padding tightens on mobile via the --card-pad token clamp(). */
+}
+
 /* Hide native scrollbar on the horizontally scrolling top nav. */
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -58,7 +91,8 @@
   flex: 1 1 auto;
 }
 .page-title-row h1 {
-  font-size: var(--text-3xl);
+  /* 26px floor at ~375px viewport, 40px (var(--text-3xl)) ceiling on desktop */
+  font-size: clamp(1.625rem, 5.5vw, var(--text-3xl));
   font-weight: 800;
   letter-spacing: -0.025em;
   color: var(--color-ink);
@@ -67,7 +101,8 @@
 }
 .page-title-row .page-last-updated {
   color: var(--color-ink-soft);
-  font-size: var(--text-sm);
+  /* 13px floor on mobile, var(--text-sm) (14px) ceiling on desktop */
+  font-size: clamp(0.8125rem, 2.8vw, var(--text-sm));
   margin: 0;
 }
 .page-title-row .page-subhead {
@@ -185,6 +220,33 @@
   .stat-card__icon svg { width: 1rem; height: 1rem; }
   .stat-card__label { font-size: 0.625rem; }
   .stat-card__value { font-size: var(--text-base); }
+}
+
+/* Phase 4: tighter still on phones (<= iPhone widths). Goal is ~72px tall
+   per card so 3 stacked cards fit in roughly 240px. Icon left, label-over-
+   value column right. */
+@media (max-width: 639px) {
+  .stat-card {
+    padding: 12px;
+    gap: var(--space-sm);
+    min-height: 0;
+    max-height: 72px;
+    align-items: center;
+  }
+  .stat-card__icon {
+    width: 32px;
+    height: 32px;
+  }
+  .stat-card__icon svg { width: 18px; height: 18px; }
+  .stat-card__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .stat-card__value {
+    font-size: 22px;
+    line-height: 1.1;
+  }
 }
 
 /* Calculator main 60/40 grid: a wider results column on the left so the
@@ -424,4 +486,160 @@
   color: var(--color-ink-soft);
   margin: var(--space-sm) 0 0;
   line-height: 1.6;
+}
+
+/* === Mobile nav (hamburger + slide-in panel) ===
+ * Active below 768px. The desktop horizontal pill nav (hidden md:flex) is
+ * untouched at >= 768px; this block only styles the slide-in panel and
+ * its backdrop. Logic lives in js/includes.js (mounted once partials are
+ * injected). */
+.tb-mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+  z-index: 60;
+}
+.tb-mobile-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tb-mobile-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(80vw, 320px);
+  background: #fff;
+  box-shadow: -8px 0 24px rgba(15, 23, 42, 0.12);
+  transform: translateX(100%);
+  transition: transform 200ms ease;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  visibility: hidden; /* off-DOM-flow when closed; toggled in is-open */
+}
+.tb-mobile-panel.is-open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.tb-mobile-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tb-mobile-panel__list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-sm) var(--space-md) var(--space-lg);
+}
+
+.tb-mobile-link {
+  display: block;
+  width: 100%;
+}
+
+.tb-mobile-divider {
+  display: block;
+  height: 1px;
+  background: var(--color-border);
+  margin: var(--space-sm) 0;
+}
+
+body.tb-nav-open {
+  overflow: hidden;
+}
+
+/* === Phase 3: page header tweaks on mobile ===
+ * The page title row keeps its desktop layout above 640px. Below that the
+ * "Saved to this device" chip shrinks to icon-only (text reappears at >= 480px
+ * if there's room) and the row aligns center-vertically so the chip sits
+ * inline with the H1 baseline. */
+.page-h1-supertag {
+  display: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.6875rem;        /* 11px */
+  font-weight: 700;
+  color: var(--color-ink-muted);
+  margin: 0 0 0.25rem;
+}
+.page-h1-short { display: none; }
+.page-h1-full { display: inline; }
+
+@media (max-width: 639px) {
+  .page-title-row {
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  .page-title-row .page-title-stack {
+    flex: 1 1 0;
+  }
+  .device-save-chip {
+    font-size: 0.6875rem;
+    flex-shrink: 0;
+  }
+  /* Icon-only on the smallest phones */
+  .device-save-chip .lock-pill > span { display: none; }
+
+  /* Paycheck H1 swap: hide the long full title, show the short label.
+     The supertag (uppercase eyebrow) sits above. */
+  .page-h1-full { display: none; }
+  .page-h1-short { display: inline; }
+  .page-h1-supertag { display: block; }
+}
+
+/* Bring back the chip text once there's enough horizontal room. */
+@media (min-width: 480px) and (max-width: 639px) {
+  .device-save-chip .lock-pill > span { display: inline; }
+}
+
+/* === Phase 5: defensive collapse for two-column rows on mobile ===
+ * Tailwind's md:grid-cols-2 already collapses to 1 col below 768px because
+ * the base `grid-cols-1` utility is paired in every page. This rule is a
+ * safety net so any inline override or future Tailwind-CDN drift can't
+ * accidentally split the row on a phone-sized viewport. */
+@media (max-width: 767px) {
+  .grid.md\:grid-cols-2,
+  .grid.md\:grid-cols-3,
+  .grid.md\:grid-cols-4 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* === Phase 7: inputs, buttons, forms on mobile === */
+@media (max-width: 639px) {
+  /* Save Scenario row stacks vertically with full-width fields. */
+  .saved-scenarios-card .input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .saved-scenarios-card .input-row input,
+  .saved-scenarios-card .save-btn {
+    width: 100%;
+  }
+
+  /* Export bar: title above, action buttons stretch full width. The
+     three buttons share the row in equal thirds with wrap fallback. */
+  .export-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .export-bar__actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+  .export-bar__btn {
+    flex: 1 1 calc(33% - 8px);
+    justify-content: center;
+  }
 }

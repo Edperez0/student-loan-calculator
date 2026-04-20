@@ -33,13 +33,16 @@
   --color-ink-soft: #64748b;
   --color-ink-faint: #94a3b8;
 
-  /* Spacing scale (4-pt rhythm) */
-  --space-xs: 0.25rem;   /* 4 */
-  --space-sm: 0.5rem;    /* 8 */
-  --space-md: 1rem;      /* 16 */
-  --space-lg: 1.5rem;    /* 24 */
-  --space-xl: 2rem;      /* 32 */
-  --space-2xl: 3rem;     /* 48 */
+  /* Spacing scale (4-pt rhythm).
+   * Mid-tier sizes use clamp() so vertical rhythm tightens on phones
+   * (e.g. --space-lg drops 24 -> 20, --space-xl 32 -> 28 at ~375px) without
+   * any media query. Floors are ~70% of desktop values. xs/sm stay fixed. */
+  --space-xs: 0.25rem;                            /* 4 */
+  --space-sm: 0.5rem;                             /* 8 */
+  --space-md: clamp(0.75rem, 2.6vw, 1rem);        /* 12 -> 16 */
+  --space-lg: clamp(1.25rem, 4vw, 1.5rem);        /* 20 -> 24 */
+  --space-xl: clamp(1.75rem, 5vw, 2rem);          /* 28 -> 32 */
+  --space-2xl: clamp(2rem, 6vw, 3rem);            /* 32 -> 48 */
 
   /* Radii */
   --radius-sm: 0.5rem;     /* 8 */
@@ -61,14 +64,17 @@
   --text-2xl: 1.5rem;
   --text-3xl: 1.875rem;
 
-  /* Layout rhythm shared across calculator pages */
-  --page-max-width: 64rem;          /* matches max-w-5xl */
+  /* Layout rhythm shared across calculator pages.
+   * --section-gap and --card-pad shrink on phones so cards don't waste
+   * vertical real-estate. --grid-gap stays fixed because it only matters
+   * at >= 1024px where the calc-grid actually splits into columns. */
+  --page-max-width: 64rem;                          /* matches max-w-5xl */
   --page-gutter: 1rem;
   --page-gutter-md: 2rem;
-  --grid-gap: 2rem;                 /* space between sidebar/main on desktop */
-  --section-gap: 1.5rem;            /* between major blocks (stat row, table, scenarios) */
-  --card-pad: 1.5rem;               /* p-6 default */
-  --card-pad-sm: 1rem;              /* p-4 */
+  --grid-gap: 2rem;                                 /* space between sidebar/main on desktop */
+  --section-gap: clamp(1rem, 3.5vw, 1.5rem);        /* 16 -> 24 */
+  --card-pad: clamp(1rem, 3.5vw, 1.5rem);           /* 16 -> 24, drops to ~16 < 640px */
+  --card-pad-sm: clamp(0.75rem, 2.6vw, 1rem);       /* 12 -> 16 */
 
   /* Shadows */
   --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.06);
