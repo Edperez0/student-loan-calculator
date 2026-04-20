@@ -4,6 +4,39 @@
  * stat cards, export bar, saved scenarios) across pages.
  */
 
+/* === Phase 1: mobile-safe globals ===
+ * These rules apply at every viewport size but are tuned to prevent the
+ * common mobile pitfalls (horizontal page scroll, iOS auto-zoom on inputs,
+ * sub-44px tap targets, runaway media). Desktop behaviour is unaffected
+ * because the constraints are upper bounds. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+/* SVG icons inside buttons/links use width/height attrs for sizing — restore
+   the height: auto override so they don't stretch. */
+button svg, a svg, .stat-card__icon svg, .lock-pill svg, .tb-info svg {
+  height: auto;
+}
+
+@media (max-width: 639px) {
+  /* iOS Safari zooms into any input whose computed font-size < 16px. */
+  input, select, textarea {
+    font-size: 16px;
+  }
+  /* Apple HIG / Material guidance — minimum tappable target. Buttons that
+     are visually small still expand their hit area via padding. */
+  button, .btn, [role="button"], a.btn, input[type="button"], input[type="submit"] {
+    min-height: 44px;
+  }
+  /* Card padding tightens on mobile via the --card-pad token clamp(). */
+}
+
 /* Hide native scrollbar on the horizontally scrolling top nav. */
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
